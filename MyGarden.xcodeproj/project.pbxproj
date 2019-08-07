@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1F922F9F02100F100F9 /* AppDelegate.swift */; };
-		5951C1FC22F9F02100F100F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1FB22F9F02100F100F9 /* ViewController.swift */; };
+		5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1FB22F9F02100F100F9 /* MainViewController.swift */; };
 		5951C1FF22F9F02100F100F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5951C1FD22F9F02100F100F9 /* Main.storyboard */; };
 		5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5951C20022F9F02100F100F9 /* MyGarden.xcdatamodeld */; };
 		5951C20422F9F02100F100F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5951C20322F9F02100F100F9 /* Assets.xcassets */; };
 		5951C20722F9F02100F100F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5951C20522F9F02100F100F9 /* LaunchScreen.storyboard */; };
+		5951C22D22FA031400F100F9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22C22FA031400F100F9 /* Plant.swift */; };
+		5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22E22FA033500F100F9 /* WateringTime.swift */; };
+		5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5951C1F622F9F02100F100F9 /* MyGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5951C1F922F9F02100F100F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5951C1FB22F9F02100F100F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5951C1FB22F9F02100F100F9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5951C1FE22F9F02100F100F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5951C20122F9F02100F100F9 /* MyGarden.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGarden.xcdatamodel; sourceTree = "<group>"; };
 		5951C20322F9F02100F100F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5951C20622F9F02100F100F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5951C20822F9F02100F100F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5951C22C22FA031400F100F9 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		5951C22E22FA033500F100F9 /* WateringTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTime.swift; sourceTree = "<group>"; };
+		5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +62,9 @@
 		5951C1F822F9F02100F100F9 /* MyGarden */ = {
 			isa = PBXGroup;
 			children = (
+				5951C23022FAB56900F100F9 /* Controller */,
+				5951C22B22FA030300F100F9 /* Model */,
 				5951C1F922F9F02100F100F9 /* AppDelegate.swift */,
-				5951C1FB22F9F02100F100F9 /* ViewController.swift */,
 				5951C1FD22F9F02100F100F9 /* Main.storyboard */,
 				5951C20322F9F02100F100F9 /* Assets.xcassets */,
 				5951C20522F9F02100F100F9 /* LaunchScreen.storyboard */,
@@ -65,6 +72,24 @@
 				5951C20022F9F02100F100F9 /* MyGarden.xcdatamodeld */,
 			);
 			path = MyGarden;
+			sourceTree = "<group>";
+		};
+		5951C22B22FA030300F100F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5951C22C22FA031400F100F9 /* Plant.swift */,
+				5951C22E22FA033500F100F9 /* WateringTime.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5951C23022FAB56900F100F9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5951C1FB22F9F02100F100F9 /* MainViewController.swift */,
+				5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +163,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5951C1FC22F9F02100F100F9 /* ViewController.swift in Sources */,
+				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
+				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
+				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
+				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,
 				5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */,
 				5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */,
 			);
