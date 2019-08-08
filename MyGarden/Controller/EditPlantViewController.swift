@@ -34,14 +34,19 @@ class EditPlantViewController: UIViewController {
         return values
     }()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+        configureKeyboardEvents()
     }
 
     func initUI() {
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: dayPottedTextField.frame.origin.y + dayPottedTextField.frame.height)
-        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(pottedDateChanged(datePicker:)), for: .valueChanged)
@@ -74,6 +79,23 @@ class EditPlantViewController: UIViewController {
     
     @objc func viewTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    func configureKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        view.frame.origin.y = -keyboardRect.height
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        view.frame.origin.y = 0
     }
 }
 
