@@ -25,4 +25,18 @@ class CoreDataHelper {
             return false
         }
     }
+    
+    static func getAllPlants() -> [Plant] {
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            guard let result = try context.fetch(Plant.fetchRequest()) as? [Plant] else {
+                return []
+            }
+            return result
+
+        } catch {
+            print(error)
+            return []
+        }
+    }
 }
