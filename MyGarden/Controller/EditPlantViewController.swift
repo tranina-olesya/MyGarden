@@ -57,6 +57,13 @@ class EditPlantViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        if let name = nameTextField.text,
+            let wateringTimeRaw = wateringTimeTextField.text,
+            let wateringTime = WateringTime(rawValue: wateringTimeRaw),
+            let date = datePicker?.date {
+            CoreDataHelper.savePlant(name: name, description: descriptionTextField.text, wateringTime: wateringTime, dayPotted: date)
+        }
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func pottedDateChanged(datePicker: UIDatePicker) {

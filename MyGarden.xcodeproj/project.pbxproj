@@ -16,6 +16,7 @@
 		5951C22D22FA031400F100F9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22C22FA031400F100F9 /* Plant.swift */; };
 		5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22E22FA033500F100F9 /* WateringTime.swift */; };
 		5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */; };
+		59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5951C22C22FA031400F100F9 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		5951C22E22FA033500F100F9 /* WateringTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTime.swift; sourceTree = "<group>"; };
 		5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
+		59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				5951C22C22FA031400F100F9 /* Plant.swift */,
 				5951C22E22FA033500F100F9 /* WateringTime.swift */,
+				59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
+				59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */,
 				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,
 				5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */,
 				5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */,

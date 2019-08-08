@@ -13,18 +13,20 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        do {
-//            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 //            let plant = Plant(context: context)
 //            plant.name = "11"
 //            plant.dayPotted = Date()
 //            plant.wateringTime = .evening
 //            try context.save()
-//            let result = try context.fetch(Plant.fetchRequest())
-//            print(result)
-//        } catch {
-//            print(error)
-//        }
+            let result = try context.fetch(Plant.fetchRequest())
+            print(result.count)
+            print((result[0] as? Plant)?.name)
+            print((result[0] as? Plant)?.descriptionText)
+        } catch {
+            print(error)
+        }
     }
 
     
