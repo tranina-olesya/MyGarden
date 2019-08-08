@@ -18,6 +18,8 @@
 		5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */; };
 		59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */; };
 		599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447522FCB55D005C30A7 /* PlantCell.swift */; };
+		599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */; };
+		599C447A22FCC912005C30A7 /* DateConvertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447922FCC912005C30A7 /* DateConvertHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 		59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		599C447522FCB55D005C30A7 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
+		599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
+		599C447922FCC912005C30A7 /* DateConvertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 				5951C22C22FA031400F100F9 /* Plant.swift */,
 				5951C22E22FA033500F100F9 /* WateringTime.swift */,
 				59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */,
+				599C447922FCC912005C30A7 /* DateConvertHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 			children = (
 				5951C1FB22F9F02100F100F9 /* MainViewController.swift */,
 				5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */,
+				599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,8 +178,10 @@
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
 				599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
+				599C447A22FCC912005C30A7 /* DateConvertHelper.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
 				59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */,
+				599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */,
 				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,
 				5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */,
 				5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */,

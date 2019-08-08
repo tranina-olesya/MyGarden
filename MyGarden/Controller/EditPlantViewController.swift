@@ -72,9 +72,7 @@ class EditPlantViewController: UIViewController {
     }
     
     @objc func pottedDateChanged(datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM, yyyy"
-        dayPottedTextField.text = dateFormatter.string(from: datePicker.date)
+        dayPottedTextField.text = DateConvertHelper.convertToString(date: datePicker.date)
     }
     
     @objc func viewTapped(tapGestureRecognizer: UITapGestureRecognizer) {

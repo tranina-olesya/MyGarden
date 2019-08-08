@@ -9,9 +9,15 @@
 import UIKit
 import CoreData
 
+enum MainViewSegue: String {
+    case plant = "showDetail"
+}
+
 class MainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var containerView: UIView!
     
     let cellMarginSize = 10
     let cellRatio: CGFloat = 1.4
@@ -21,12 +27,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        plants = CoreDataHelper.getAllPlants()
         configureCollectionView()
-    }
-    
-    @IBAction func addButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "showPlant", sender: nil)
+        updateCollectionView()
     }
     
     func configureCollectionView() {
@@ -36,10 +38,31 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
+        updateCollectionView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? ""),
+            let indexPath = collectionView.indexPathsForSelectedItems?.first,
+            let plant = plants?[indexPath.row] else {
+            return
+        }
+        switch mainViewSegue {
+        case .plant:
+            let vc = segue.destination as? PlantDetailViewController
+            vc?.plant = plant
+        }
+    }
+    
+    func updateCollectionView() {
+        plants = CoreDataHelper.getAllPlants()
+        collectionView.reloadData()
+        collectionView.frame = CGRect(x: collectionView.frame.origin.x, y: collectionView.frame.origin.y, width: collectionView.frame.width, height: 900)
+        containerView.frame = CGRect(x: containerView.frame.origin.x, y: containerView.frame.origin.y, width: containerView.frame.width, height: 1500)
     }
 }
 
