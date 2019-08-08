@@ -19,7 +19,9 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
     
-    let cellMarginSize = 10
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
+    let cellMarginSize: CGFloat = 10
     let cellRatio: CGFloat = 1.4
     
     var plants: [Plant]?
@@ -39,6 +41,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         updateCollectionView()
+        print(collectionViewHeightConstraint.constant)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,8 +64,15 @@ class MainViewController: UIViewController {
     func updateCollectionView() {
         plants = CoreDataHelper.getAllPlants()
         collectionView.reloadData()
-        collectionView.frame = CGRect(x: collectionView.frame.origin.x, y: collectionView.frame.origin.y, width: collectionView.frame.width, height: 900)
-        containerView.frame = CGRect(x: containerView.frame.origin.x, y: containerView.frame.origin.y, width: containerView.frame.width, height: 1500)
+        collectionViewHeightConstraint.constant = getCollectionViewHeight()
+        view.layoutIfNeeded()
+    }
+    
+    func getCollectionViewHeight() -> CGFloat {
+        let screenWidth = view.frame.width
+        let cellWidth = screenWidth / 2 - CGFloat(cellMarginSize * 2)
+        let cellHeight = cellWidth * cellRatio + cellMarginSize * 2
+        return ceil(CGFloat(plants?.count ?? 0) / 2.0) * cellHeight
     }
 }
 

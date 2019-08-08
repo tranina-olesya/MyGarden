@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3B-1u-wPp">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1069"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="733"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1gg-3U-56g">
                                                 <rect key="frame" x="0.0" y="73" width="414" height="170"/>
@@ -64,9 +64,12 @@
                                                     <segue destination="d3k-29-jfU" kind="show" id="zml-eD-Bwa"/>
                                                 </connections>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uZ9-NC-Cg5">
-                                                <rect key="frame" x="0.0" y="333" width="414" height="736"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uZ9-NC-Cg5">
+                                                <rect key="frame" x="0.0" y="333" width="414" height="400"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="400" id="UR4-29-6Wd"/>
+                                                </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pav-83-9D8">
                                                     <size key="itemSize" width="191" height="226"/>
                                                     <size key="headerReferenceSize" width="10" height="10"/>
@@ -169,7 +172,6 @@
                             <constraint firstItem="GiK-XF-ZhM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mcv-ym-DDm"/>
                             <constraint firstItem="F3B-1u-wPp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="qSf-d0-nlf"/>
                             <constraint firstItem="F3B-1u-wPp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" priority="999" id="u34-Py-5z5"/>
-                            <constraint firstItem="uZ9-NC-Cg5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="xXa-Kj-m5g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -178,6 +180,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="uZ9-NC-Cg5" id="NFg-0W-PXD"/>
+                        <outlet property="collectionViewHeightConstraint" destination="UR4-29-6Wd" id="iYF-ob-v8k"/>
                         <outlet property="containerView" destination="F3B-1u-wPp" id="Mhz-28-lx1"/>
                     </connections>
                 </viewController>
@@ -490,6 +493,6 @@
         <image name="icons8-plus-48" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2rs-61-WLO"/>
+        <segue reference="zml-eD-Bwa"/>
     </inferredMetricsTieBreakers>
 </document>
