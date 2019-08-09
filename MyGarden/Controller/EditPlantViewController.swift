@@ -44,19 +44,50 @@ class EditPlantViewController: UIViewController {
         super.viewDidLoad()
         initUI()
         configureKeyboardEvents()
+        configureTapRecognizer()
     }
 
+    @IBAction func addImage(_ sender: Any) {
+        let actionSheet = UIAlertController(title: "Add image", message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            self.dismiss(animated: true)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "From gallery", style: .default, handler: { (action) in
+            
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerController.SourceType.photoLibrary
+            self.present(image, animated: true)
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Open camera", style: .default, handler: { (action) in
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.sourceType = UIImagePickerController.SourceType.camera
+            self.present(image, animated: true)
+        }))
+        present(actionSheet, animated: true)
+    }
+    
     func initUI() {
+        dayPottedTextField.text = DateConvertHelper.convertToString(date: Date())
+        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(pottedDateChanged(datePicker:)), for: .valueChanged)
+        datePicker?.maximumDate = Date()
         dayPottedTextField.inputView = datePicker
         
         wateringTimePicker = UIPickerView()
         wateringTimePicker?.dataSource = self
         wateringTimePicker?.delegate = self
         wateringTimeTextField.inputView = wateringTimePicker
-        
+    }
+    
+    func configureTapRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped(tapGestureRecognizer:)))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -112,5 +143,15 @@ extension EditPlantViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         wateringTimeTextField.text = wateringTimeValues[row]
+    }
+}
+
+extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            return
+        }
+        plantImageView.image = image
+        dismiss(animated: true, completion: nil)
     }
 }

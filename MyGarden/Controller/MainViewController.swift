@@ -41,7 +41,6 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
         updateCollectionView()
-        print(collectionViewHeightConstraint.constant)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
