@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */; };
+		591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F822FF5E1B003BA271 /* PlantsCell.swift */; };
 		5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1F922F9F02100F100F9 /* AppDelegate.swift */; };
 		5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1FB22F9F02100F100F9 /* MainViewController.swift */; };
 		5951C1FF22F9F02100F100F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5951C1FD22F9F02100F100F9 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPlantsCell.swift; sourceTree = "<group>"; };
+		591E18F822FF5E1B003BA271 /* PlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCell.swift; sourceTree = "<group>"; };
 		5951C1F622F9F02100F100F9 /* MyGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5951C1F922F9F02100F100F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5951C1FB22F9F02100F100F9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		591E18F522FF59EF003BA271 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5975776422FD5B5300C51A21 /* Cells */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
 		5951C1ED22F9F02000F100F9 = {
 			isa = PBXGroup;
 			children = (
@@ -81,9 +93,9 @@
 		5951C22B22FA030300F100F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5975776022FD5AFC00C51A21 /* Helpers */,
 				5951C22C22FA031400F100F9 /* Plant.swift */,
 				5951C22E22FA033500F100F9 /* WateringTime.swift */,
+				5975776022FD5AFC00C51A21 /* Helpers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -91,7 +103,7 @@
 		5951C23022FAB56900F100F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5951C1FB22F9F02100F100F9 /* MainViewController.swift */,
+				591E18F522FF59EF003BA271 /* MainViewController */,
 				5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */,
 				599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */,
 			);
@@ -120,10 +132,9 @@
 		5975776222FD5B1C00C51A21 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5951C23022FAB56900F100F9 /* Controllers */,
 				5951C20522F9F02100F100F9 /* LaunchScreen.storyboard */,
 				5951C1FD22F9F02100F100F9 /* Main.storyboard */,
-				5975776422FD5B5300C51A21 /* Cells */,
-				5951C23022FAB56900F100F9 /* Controllers */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -139,7 +150,10 @@
 		5975776422FD5B5300C51A21 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5951C1FB22F9F02100F100F9 /* MainViewController.swift */,
 				599C447522FCB55D005C30A7 /* PlantCell.swift */,
+				591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */,
+				591E18F822FF5E1B003BA271 /* PlantsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -217,8 +231,10 @@
 			files = (
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
 				599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */,
+				591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
 				599C447A22FCC912005C30A7 /* DateConvertHelper.swift in Sources */,
+				591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
 				59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */,
 				599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */,
