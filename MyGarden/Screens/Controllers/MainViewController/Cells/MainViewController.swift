@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 enum MainViewSegue: String {
-    case plant = "showDetail"
+    case plant = "showPlantDetail"
 }
 
 class MainViewController: UIViewController {
@@ -50,20 +50,15 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) as? PlantsCell else {
+        guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? ""),
+            let plant = sender as? Plant else {
             return
         }
-        print(cell.collectionView.indexPathsForSelectedItems?.first?.row)
-//        guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? ""),
-//            let indexPath = collectionView.indexPathsForSelectedItems?.first,
-//            let plant = plants?[indexPath.row] else {
-//            return
-//        }
-//        switch mainViewSegue {
-//        case .plant:
-//            let vc = segue.destination as? PlantDetailViewController
-//            vc?.plant = plant
-//        }
+        switch mainViewSegue {
+        case .plant:
+            let vc = segue.destination as? PlantDetailViewController
+            vc?.plant = plant
+        }
     }
     
     func updateTableView() {
@@ -74,7 +69,7 @@ class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource, PlantsCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -98,7 +93,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantsCell", for: indexPath) as? PlantsCell else {
                 return UITableViewCell()
             }
-
+            cell.delegate = self
             cell.configureCell(plants: plants)
             return cell
         }
@@ -139,5 +134,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(plants: plants)
         
         }
+    }
+    
+    func didSelectedItem(indexPath: IndexPath) {
+        performSegue(withIdentifier: "showPlantDetail", sender: plants?[indexPath.row])
     }
 }

@@ -13,7 +13,6 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MyGarden" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -99,7 +98,7 @@
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="01v-Xk-W2X">
                                                     <rect key="frame" x="0.0" y="90" width="414" height="400"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="400" id="fYt-qn-bps"/>
                                                     </constraints>
@@ -148,7 +147,6 @@
                                                             <connections>
                                                                 <outlet property="imageView" destination="hbr-M2-sxn" id="MYp-Ly-l0C"/>
                                                                 <outlet property="nameLabel" destination="Jax-yq-Adp" id="WZn-8b-9gE"/>
-                                                                <segue destination="Vtu-c1-p8n" kind="show" id="zTK-9W-xTn"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -193,8 +191,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Xsq-7D-4Qs" id="ZNt-ZS-3Yg"/>
+                        <segue destination="Vtu-c1-p8n" kind="show" identifier="showPlantDetail" id="3Ws-vB-Qj1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="947.82608695652186" y="18.75"/>
         </scene>
@@ -396,7 +396,6 @@
         <!--Plant Detail View Controller-->
         <scene sceneID="DHS-aq-DFc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Mb-wF-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Vtu-c1-p8n" customClass="PlantDetailViewController" customModule="MyGarden" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hrn-K2-4xi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -529,6 +528,7 @@
                         <outlet property="wateringTimeLabel" destination="0de-gL-wgv" id="X3g-O6-OGN"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Mb-wF-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1065" y="774"/>
         </scene>

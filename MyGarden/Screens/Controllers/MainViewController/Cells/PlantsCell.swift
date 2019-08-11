@@ -12,6 +12,8 @@ class PlantsCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    weak var delegate: PlantsCellDelegate?
+    
     static let cellMarginSize: CGFloat = 10
     static let cellRatio: CGFloat = 1.4
 
@@ -58,4 +60,12 @@ extension PlantsCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectedItem(indexPath: indexPath)
+    }
+}
+
+protocol PlantsCellDelegate: class {
+    func didSelectedItem(indexPath: IndexPath)
 }
