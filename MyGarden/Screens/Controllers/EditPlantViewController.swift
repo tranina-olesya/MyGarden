@@ -97,7 +97,14 @@ class EditPlantViewController: UIViewController {
             let wateringTimeRaw = wateringTimeTextField.text,
             let wateringTime = WateringTime(rawValue: wateringTimeRaw),
             let date = datePicker?.date {
-            CoreDataHelper.savePlant(name: name, description: descriptionTextField.text, wateringTime: wateringTime, dayPotted: date)
+            let success = CoreDataHelper.savePlant(name: name, description: descriptionTextField.text, wateringTime: wateringTime, dayPotted: date)
+            if success {
+                let plantsCount = CoreDataHelper.getAllPlants().count
+                if plantsCount > 0 {
+                    
+                }
+                UserNotification.updateNotifications()
+            }
         }
         navigationController?.popViewController(animated: true)
     }

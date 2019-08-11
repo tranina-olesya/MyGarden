@@ -6,7 +6,7 @@
 //  Copyright © 2019 Olesya Tranina. All rights reserved.
 //
 
-import Foundation
+import CoreData
 import UIKit
 
 class CoreDataHelper {
@@ -21,7 +21,7 @@ class CoreDataHelper {
             try context.save()
             return true
         } catch {
-            print(error)
+            print(error.localizedDescription)
             return false
         }
     }
@@ -35,7 +35,22 @@ class CoreDataHelper {
             return result
 
         } catch {
-            print(error)
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
+    static func gelAllPlants(wateringTime: WateringTime) -> [Plant] {
+        do {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Plant")
+            fetchRequest.predicate = NSPredicate(format: "wateringTimeRaw == %@", wateringTime.rawValue)
+            guard let result = try context.fetch(fetchRequest) as? [Plant] else {
+                return []
+            }
+            return result
+        } catch {
+            print(error.localizedDescription)
             return []
         }
     }
