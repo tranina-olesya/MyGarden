@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class CoreDataHelper {
+class CoreDataService {
     static func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date) -> Bool {
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

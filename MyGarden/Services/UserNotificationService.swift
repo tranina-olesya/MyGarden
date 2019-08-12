@@ -26,7 +26,7 @@ let notificationsTime: [WateringTime: DateComponents] = {
 }()
 
 
-class UserNotification {
+class UserNotificationService {
     
     static func sendNotification(identifier: String, notification: TimeToWaterNotification) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (success, error) in
@@ -59,7 +59,7 @@ class UserNotification {
     
     static func updateNotifications() {
         for enumValue in WateringTime.allCases {
-            let plants = CoreDataHelper.gelAllPlants(wateringTime: enumValue)
+            let plants = CoreDataService.gelAllPlants(wateringTime: enumValue)
             if plants.count > 0,
                 let dateComponents = notificationsTime[enumValue] {
                 sendNotification(identifier: enumValue.rawValue, notification: TimeToWaterNotification(plantsCount: plants.count, dateComponents: dateComponents))

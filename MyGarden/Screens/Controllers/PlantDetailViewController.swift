@@ -26,7 +26,7 @@ class PlantDetailViewController: UIViewController {
         descriptionLabel.text = plant?.descriptionText
         wateringTimeLabel.text = plant?.wateringTime.rawValue
         if let dayPotted = plant?.dayPotted {
-            dayPottedLabel.text = DateConvertHelper.convertToString(date: dayPotted)
+            dayPottedLabel.text = DateConvertService.convertToString(date: dayPotted)
         }
     }
     

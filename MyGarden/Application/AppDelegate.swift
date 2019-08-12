@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
         }
         
-        UserNotification.updateNotifications()
+        UserNotificationService.updateNotifications()
         return true
     }
 

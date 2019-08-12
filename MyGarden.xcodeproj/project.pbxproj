@@ -18,12 +18,17 @@
 		5951C22D22FA031400F100F9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22C22FA031400F100F9 /* Plant.swift */; };
 		5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22E22FA033500F100F9 /* WateringTime.swift */; };
 		5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */; };
-		59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */; };
-		59806BF323008AA00051277B /* UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59806BF223008AA00051277B /* UserNotification.swift */; };
+		59619C1022FBFD65000324F6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59619C0F22FBFD65000324F6 /* CoreDataService.swift */; };
+		59806BF323008AA00051277B /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59806BF223008AA00051277B /* UserNotificationService.swift */; };
 		59806BF523008B6E0051277B /* TimeToWaterNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59806BF423008B6E0051277B /* TimeToWaterNotification.swift */; };
 		599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447522FCB55D005C30A7 /* PlantCell.swift */; };
 		599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */; };
-		599C447A22FCC912005C30A7 /* DateConvertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447922FCC912005C30A7 /* DateConvertHelper.swift */; };
+		599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447922FCC912005C30A7 /* DateConvertService.swift */; };
+		59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66CFF2301C0E300791DDD /* UINavigationController.swift */; };
+		59E66D082301C48600791DDD /* PlantImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D072301C48600791DDD /* PlantImageCell.swift */; };
+		59E66D0A2301C4AA00791DDD /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D092301C4AA00791DDD /* TextFieldCell.swift */; };
+		59E66D0C2301C99100791DDD /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D0B2301C99100791DDD /* DatePickerCell.swift */; };
+		59E66D0E2301C9B400791DDD /* WateringTimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D0D2301C9B400791DDD /* WateringTimePickerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,12 +45,17 @@
 		5951C22C22FA031400F100F9 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		5951C22E22FA033500F100F9 /* WateringTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTime.swift; sourceTree = "<group>"; };
 		5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
-		59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
-		59806BF223008AA00051277B /* UserNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotification.swift; sourceTree = "<group>"; };
+		59619C0F22FBFD65000324F6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		59806BF223008AA00051277B /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		59806BF423008B6E0051277B /* TimeToWaterNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToWaterNotification.swift; sourceTree = "<group>"; };
 		599C447522FCB55D005C30A7 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
 		599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
-		599C447922FCC912005C30A7 /* DateConvertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertHelper.swift; sourceTree = "<group>"; };
+		599C447922FCC912005C30A7 /* DateConvertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertService.swift; sourceTree = "<group>"; };
+		59E66CFF2301C0E300791DDD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		59E66D072301C48600791DDD /* PlantImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantImageCell.swift; sourceTree = "<group>"; };
+		59E66D092301C4AA00791DDD /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		59E66D0B2301C99100791DDD /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		59E66D0D2301C9B400791DDD /* WateringTimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTimePickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +97,11 @@
 		5951C1F822F9F02100F100F9 /* MyGarden */ = {
 			isa = PBXGroup;
 			children = (
+				59E66CFE2301C07B00791DDD /* Extensions */,
 				5975776322FD5B2900C51A21 /* Resources */,
 				5975776222FD5B1C00C51A21 /* Screens */,
 				5975776122FD5B0900C51A21 /* Application */,
+				5975776022FD5AFC00C51A21 /* Services */,
 				5951C22B22FA030300F100F9 /* Model */,
 			);
 			path = MyGarden;
@@ -101,7 +113,6 @@
 				5951C22C22FA031400F100F9 /* Plant.swift */,
 				5951C22E22FA033500F100F9 /* WateringTime.swift */,
 				59806BF423008B6E0051277B /* TimeToWaterNotification.swift */,
-				5975776022FD5AFC00C51A21 /* Helpers */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,21 +120,22 @@
 		5951C23022FAB56900F100F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				59E66D0F2301DEDA00791DDD /* PlantDetailViewController */,
+				59E66D012301C3FF00791DDD /* EditPlantViewController */,
 				591E18F522FF59EF003BA271 /* MainViewController */,
-				5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */,
 				599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5975776022FD5AFC00C51A21 /* Helpers */ = {
+		5975776022FD5AFC00C51A21 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				59619C0F22FBFD65000324F6 /* CoreDataHelper.swift */,
-				599C447922FCC912005C30A7 /* DateConvertHelper.swift */,
-				59806BF223008AA00051277B /* UserNotification.swift */,
+				59619C0F22FBFD65000324F6 /* CoreDataService.swift */,
+				599C447922FCC912005C30A7 /* DateConvertService.swift */,
+				59806BF223008AA00051277B /* UserNotificationService.swift */,
 			);
-			path = Helpers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		5975776122FD5B0900C51A21 /* Application */ = {
@@ -162,6 +174,41 @@
 				591E18F822FF5E1B003BA271 /* PlantsCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		59E66CFE2301C07B00791DDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				59E66CFF2301C0E300791DDD /* UINavigationController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		59E66D012301C3FF00791DDD /* EditPlantViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59E66D022301C40F00791DDD /* Cells */,
+				5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */,
+			);
+			path = EditPlantViewController;
+			sourceTree = "<group>";
+		};
+		59E66D022301C40F00791DDD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				59E66D072301C48600791DDD /* PlantImageCell.swift */,
+				59E66D092301C4AA00791DDD /* TextFieldCell.swift */,
+				59E66D0B2301C99100791DDD /* DatePickerCell.swift */,
+				59E66D0D2301C9B400791DDD /* WateringTimePickerCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		59E66D0F2301DEDA00791DDD /* PlantDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlantDetailViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,14 +283,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
+				59E66D082301C48600791DDD /* PlantImageCell.swift in Sources */,
 				599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */,
 				591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */,
+				59E66D0A2301C4AA00791DDD /* TextFieldCell.swift in Sources */,
+				59E66D0C2301C99100791DDD /* DatePickerCell.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
-				59806BF323008AA00051277B /* UserNotification.swift in Sources */,
-				599C447A22FCC912005C30A7 /* DateConvertHelper.swift in Sources */,
+				59806BF323008AA00051277B /* UserNotificationService.swift in Sources */,
+				59E66D0E2301C9B400791DDD /* WateringTimePickerCell.swift in Sources */,
+				599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */,
+				59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */,
 				591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
-				59619C1022FBFD65000324F6 /* CoreDataHelper.swift in Sources */,
+				59619C1022FBFD65000324F6 /* CoreDataService.swift in Sources */,
 				599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */,
 				59806BF523008B6E0051277B /* TimeToWaterNotification.swift in Sources */,
 				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,

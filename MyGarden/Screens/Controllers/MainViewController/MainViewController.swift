@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        plants = CoreDataHelper.getAllPlants()
+        plants = CoreDataService.getAllPlants()
     }
     
     func configureTableView() {
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
     }
     
     func updateTableView() {
-        plants = CoreDataHelper.getAllPlants()
+        plants = CoreDataService.getAllPlants()
         tableView.reloadData()
     }
     
