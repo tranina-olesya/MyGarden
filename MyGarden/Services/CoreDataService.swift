@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 class CoreDataService {
-    static func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int) -> Bool {
+    static func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int, photoUrl: String) -> Bool {
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let plant = Plant(context: context)
@@ -20,6 +20,7 @@ class CoreDataService {
             plant.wateringTime = wateringTime
             plant.waterSchedule = Int16(waterSchedule)
             plant.lastWatered = dayPotted
+            plant.photoUrl = photoUrl
             try context.save()
             UserNotificationService.updateNotification(plant: plant)
             return true

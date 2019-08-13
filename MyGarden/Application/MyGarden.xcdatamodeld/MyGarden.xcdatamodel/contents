@@ -3,12 +3,13 @@
     <entity name="Plant" representedClassName="Plant" syncable="YES" codeGenerationType="class">
         <attribute name="dayPotted" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastWatered" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastWatered" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="photoUrl" attributeType="String" syncable="YES"/>
         <attribute name="wateringTimeRaw" attributeType="String" defaultValueString="Morning" syncable="YES"/>
-        <attribute name="waterSchedule" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="waterSchedule" attributeType="Integer 16" minValueString="1" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Plant" positionX="-36" positionY="9" width="128" height="135"/>
+        <element name="Plant" positionX="-36" positionY="9" width="128" height="150"/>
     </elements>
 </model>

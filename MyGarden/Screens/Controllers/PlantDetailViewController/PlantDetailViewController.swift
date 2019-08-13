@@ -36,7 +36,6 @@ class PlantDetailViewController: UIViewController {
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        print(offset)
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantDetailImageCell {
             cell.handleScroll(offset: offset)
         }
@@ -61,6 +60,10 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
         case .image:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantDetailImageCell", for: indexPath) as? PlantDetailImageCell else {
                 return UITableViewCell()
+            }
+            if let name = plant?.name,
+                let photo = ImageSaveService.getSavedImage(name: name) {
+                cell.configureCell(image: photo)
             }
             return cell
         case .name:

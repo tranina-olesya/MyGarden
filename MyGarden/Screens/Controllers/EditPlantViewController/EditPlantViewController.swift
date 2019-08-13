@@ -46,6 +46,8 @@ class EditPlantViewController: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         if
+            let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
+            let image = imageCell.plantImageView.image,
             let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.name.rawValue)) as? TextFieldCell,
             let name = nameCell.valueTextField.text,
             let descriptionCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.description.rawValue)) as? TextFieldCell,
@@ -57,11 +59,13 @@ class EditPlantViewController: UIViewController {
             let dayPottedCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.dayPotted.rawValue)) as? DatePickerCell,
             let dayPotted = DateConvertService.convertToDate(dateString: dayPottedCell.dayPottedTextField.text ?? "")
         {
-            let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule)
-            if success {
-                //
-            } else {
-                print("aa")
+            if let pathUrl = ImageSaveService.saveImage(name: name, image: image) {
+                let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl)
+                if success {
+                    //
+                } else {
+                    //
+                }
             }
         }
         navigationController?.popViewController(animated: true)

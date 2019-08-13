@@ -20,6 +20,5 @@ class PlantDetailImageCell: UITableViewCell {
     func handleScroll(offset: CGFloat) {
         clipsToBounds = offset >= 0
         heightConstraint.constant = 300 - offset
-        print(heightConstraint.constant)
     }
 }

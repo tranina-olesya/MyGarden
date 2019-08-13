@@ -32,8 +32,8 @@ class ApiService {
     }
     
     private static func convertToPlantEtries(rawString: String) -> [PlantEntry] {
-        var firstList = rawString.components(separatedBy: "|-")
-        var secondList = firstList[firstList.count - 1].components(separatedBy: "*")
+        let firstList = rawString.components(separatedBy: "|-")
+        let secondList = firstList[firstList.count - 1].components(separatedBy: "*")
         
         var plants = [PlantEntry]()
         
