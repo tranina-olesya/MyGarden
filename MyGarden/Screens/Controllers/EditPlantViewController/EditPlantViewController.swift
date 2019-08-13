@@ -15,6 +15,7 @@ class EditPlantViewController: UIViewController {
         case name
         case description
         case wateringTime
+        case waterSchedule
         case dayPotted
     }
    
@@ -44,7 +45,6 @@ class EditPlantViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        print(Sections.wateringTime.rawValue)
         if
             let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.name.rawValue)) as? TextFieldCell,
             let name = nameCell.valueTextField.text,
@@ -52,12 +52,14 @@ class EditPlantViewController: UIViewController {
             let description = descriptionCell.valueTextField.text,
             let wateringTimeCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.wateringTime.rawValue)) as? WateringTimePickerCell,
             let wateringTime = WateringTime(rawValue: wateringTimeCell.wateringTimeTextField.text ?? ""),
+            let waterScheduleCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.waterSchedule.rawValue)) as? WaterSchedulePickerCell,
+            let waterSchedule = Int(waterScheduleCell.waterScheduleTextField.text ?? ""),
             let dayPottedCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.dayPotted.rawValue)) as? DatePickerCell,
             let dayPotted = DateConvertService.convertToDate(dateString: dayPottedCell.dayPottedTextField.text ?? "")
         {
-            let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted)
+            let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule)
             if success {
-                UserNotificationService.updateNotifications()
+                //
             } else {
                 print("aa")
             }
@@ -127,6 +129,11 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .dayPotted:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "DatePickerCell", for: indexPath) as? DatePickerCell else {
+                return UITableViewCell()
+            }
+            return cell
+        case .waterSchedule:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WaterSchedulePickerCell", for: indexPath) as? WaterSchedulePickerCell else {
                 return UITableViewCell()
             }
             return cell

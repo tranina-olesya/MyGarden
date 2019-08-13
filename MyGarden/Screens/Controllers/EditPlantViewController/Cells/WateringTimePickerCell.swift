@@ -22,6 +22,7 @@ class WateringTimePickerCell: UITableViewCell {
     }()
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         initUI()
     }
     

@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 class CoreDataService {
-    static func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date) -> Bool {
+    static func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int) -> Bool {
         do {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let plant = Plant(context: context)
@@ -18,7 +18,10 @@ class CoreDataService {
             plant.descriptionText = description
             plant.dayPotted = dayPotted
             plant.wateringTime = wateringTime
+            plant.waterSchedule = Int16(waterSchedule)
+            plant.lastWatered = dayPotted
             try context.save()
+            UserNotificationService.updateNotification(plant: plant)
             return true
         } catch {
             print(error.localizedDescription)

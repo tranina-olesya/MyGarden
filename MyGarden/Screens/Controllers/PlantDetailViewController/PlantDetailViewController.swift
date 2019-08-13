@@ -15,6 +15,7 @@ class PlantDetailViewController: UIViewController {
         case name
         case description
         case wateringTime
+        case waterSchedule
         case dayPotted
     }
     
@@ -77,6 +78,14 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
             }
             if let dayPotted = plant?.dayPotted {
                 cell.configureCell(fieldName: "Day Potted", fieldValue: DateConvertService.convertToString(date: dayPotted))
+            }
+            return cell
+        case .waterSchedule:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantDetailFieldCell", for: indexPath) as? PlantDetailFieldCell else {
+                return UITableViewCell()
+            }
+            if let waterSchedule = plant?.waterSchedule {
+                cell.configureCell(fieldName: "Water Schedule", fieldValue: String(waterSchedule))
             }
             return cell
         }

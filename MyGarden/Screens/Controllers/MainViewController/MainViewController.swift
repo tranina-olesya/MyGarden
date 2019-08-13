@@ -23,11 +23,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var plants: [Plant]?
+    var waterNotificationPlats: [Plant]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         plants = CoreDataService.getAllPlants()
+        waterNotificationPlats = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())        
     }
     
     func configureTableView() {
@@ -65,6 +67,20 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
 
+    func formWaterNotificationPlatsArray(plants: [Plant]) -> [Plant] {
+        let nowDate = Date()
+        var waterNotificationPlants = [Plant]()
+        for plant in plants {
+            guard let lastWatered = plant.lastWatered else {
+                continue
+            }
+            let shouldWateredDate = Date(timeInterval: TimeInterval(Int(plant.waterSchedule) * 24 * 60 * 60), since: lastWatered)
+            if shouldWateredDate < nowDate {
+                waterNotificationPlants.append(plant)
+            }
+        }
+        return waterNotificationPlants
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource, PlantsCellDelegate {

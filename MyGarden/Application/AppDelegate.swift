@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
         }
-        
-        UserNotificationService.updateNotifications()
         return true
     }
 
