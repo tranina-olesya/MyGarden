@@ -9,5 +9,11 @@
 import UIKit
 
 extension UINavigationController {
-    
+    func designTransparent() {
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
+        navigationBar.backgroundColor = .clear
+        navigationBar.tintColor = .white
+    }
 }

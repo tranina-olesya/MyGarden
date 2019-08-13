@@ -26,11 +26,20 @@ class PlantDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        navigationController?.designTransparent()
     }
     
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+ 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        print(offset)
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantDetailImageCell {
+            cell.handleScroll(offset: offset)
+        }
     }
 }
 
@@ -88,6 +97,19 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.configureCell(fieldName: "Water Schedule", fieldValue: String(waterSchedule))
             }
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let sectionType = Sections(rawValue: indexPath.section) else {
+            return 0.0
+        }
+        
+        switch sectionType {
+        case .image:
+            return 300.0
+        default:
+            return 98.0
         }
     }
 }

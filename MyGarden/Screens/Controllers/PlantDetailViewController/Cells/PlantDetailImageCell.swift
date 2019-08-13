@@ -11,8 +11,15 @@ import UIKit
 class PlantDetailImageCell: UITableViewCell {
     
     @IBOutlet weak var plantImageView: UIImageView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     func configureCell(image: UIImage) {
         plantImageView.image = image
+    }
+    
+    func handleScroll(offset: CGFloat) {
+        clipsToBounds = offset >= 0
+        heightConstraint.constant = 300 - offset
+        print(heightConstraint.constant)
     }
 }
