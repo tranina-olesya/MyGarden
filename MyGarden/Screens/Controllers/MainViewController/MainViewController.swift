@@ -23,13 +23,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var plants: [Plant]?
-    var waterNotificationPlats: [Plant]?
+    var waterNotificationPlants: [Plant] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         plants = CoreDataService.getAllPlants()
-        waterNotificationPlats = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())        
+        waterNotificationPlants = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())
     }
     
     func configureTableView() {
@@ -102,6 +102,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, Plants
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "WaterPlantsCell", for: indexPath) as? WaterPlantsCell else {
                 return UITableViewCell()
             }
+            cell.configureCell(plants: waterNotificationPlants)
             return cell
         case .plantsCell:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantsCell", for: indexPath) as? PlantsCell else {

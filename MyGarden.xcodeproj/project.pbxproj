@@ -31,6 +31,7 @@
 		59E66D122301DF9500791DDD /* PlantDetailFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D112301DF9500791DDD /* PlantDetailFieldCell.swift */; };
 		59E66D142301E57F00791DDD /* PlantDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D132301E57F00791DDD /* PlantDetailImageCell.swift */; };
 		59EEE3412302894A00F3DAC1 /* WaterSchedulePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEE3402302894A00F3DAC1 /* WaterSchedulePickerCell.swift */; };
+		59EEE343230295F700F3DAC1 /* WaterNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEE342230295F700F3DAC1 /* WaterNotificationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		59E66D112301DF9500791DDD /* PlantDetailFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailFieldCell.swift; sourceTree = "<group>"; };
 		59E66D132301E57F00791DDD /* PlantDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailImageCell.swift; sourceTree = "<group>"; };
 		59EEE3402302894A00F3DAC1 /* WaterSchedulePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterSchedulePickerCell.swift; sourceTree = "<group>"; };
+		59EEE342230295F700F3DAC1 /* WaterNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterNotificationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				599C447522FCB55D005C30A7 /* PlantCell.swift */,
 				591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */,
 				591E18F822FF5E1B003BA271 /* PlantsCell.swift */,
+				59EEE342230295F700F3DAC1 /* WaterNotificationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				59806BF323008AA00051277B /* UserNotificationService.swift in Sources */,
 				59E66D0E2301C9B400791DDD /* WateringTimePickerCell.swift in Sources */,
 				599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */,
+				59EEE343230295F700F3DAC1 /* WaterNotificationCell.swift in Sources */,
 				59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */,
 				591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
