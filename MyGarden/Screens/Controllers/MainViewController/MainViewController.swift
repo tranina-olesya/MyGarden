@@ -27,6 +27,13 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ApiService.getWikiInfo(onCompleted: { (plantEntries) in
+            plantEntries.forEach { print("\($0.name)\n\($0.description ?? "--")\n") }
+        }) { (error) in
+            print("")
+        }
+        
         configureTableView()
         plants = CoreDataService.getAllPlants()
         waterNotificationPlants = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())
