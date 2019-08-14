@@ -26,6 +26,7 @@ class WaterPlantsCell: UITableViewCell {
     
     func configureCell(plants: [Plant]) {
         self.plants = plants
+        collectionView.reloadData()
     }
 }
 

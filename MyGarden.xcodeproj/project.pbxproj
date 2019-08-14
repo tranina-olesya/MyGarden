@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66D2303F1BC0089E7BE /* UIImage.swift */; };
+		590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66F2304687D0089E7BE /* NetworkConstants.swift */; };
+		590AE673230482070089E7BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE672230482070089E7BE /* CoreDataStack.swift */; };
+		590AE6752304826B0089E7BE /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE6742304826B0089E7BE /* DataProvider.swift */; };
 		591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */; };
 		591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F822FF5E1B003BA271 /* PlantsCell.swift */; };
 		59508850230337D1007658A9 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950884F230337D1007658A9 /* ApiService.swift */; };
@@ -23,7 +26,6 @@
 		5951C22D22FA031400F100F9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22C22FA031400F100F9 /* Plant.swift */; };
 		5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C22E22FA033500F100F9 /* WateringTime.swift */; };
 		5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */; };
-		59619C1022FBFD65000324F6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59619C0F22FBFD65000324F6 /* CoreDataService.swift */; };
 		59806BF323008AA00051277B /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59806BF223008AA00051277B /* UserNotificationService.swift */; };
 		599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447522FCB55D005C30A7 /* PlantCell.swift */; };
 		599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */; };
@@ -38,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		590AE66D2303F1BC0089E7BE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		590AE66F2304687D0089E7BE /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		590AE672230482070089E7BE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		590AE6742304826B0089E7BE /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPlantsCell.swift; sourceTree = "<group>"; };
 		591E18F822FF5E1B003BA271 /* PlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCell.swift; sourceTree = "<group>"; };
 		5950884F230337D1007658A9 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -55,7 +60,6 @@
 		5951C22C22FA031400F100F9 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		5951C22E22FA033500F100F9 /* WateringTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTime.swift; sourceTree = "<group>"; };
 		5951C23122FAB5B400F100F9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
-		59619C0F22FBFD65000324F6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		59806BF223008AA00051277B /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		599C447522FCB55D005C30A7 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
 		599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		590AE671230481D10089E7BE /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				5951C20022F9F02100F100F9 /* MyGarden.xcdatamodeld */,
+				590AE672230482070089E7BE /* CoreDataStack.swift */,
+				590AE6742304826B0089E7BE /* DataProvider.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		591E18F522FF59EF003BA271 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +121,7 @@
 		5951C1F822F9F02100F100F9 /* MyGarden */ = {
 			isa = PBXGroup;
 			children = (
+				590AE671230481D10089E7BE /* Database */,
 				5975776222FD5B1C00C51A21 /* Screens */,
 				5975776022FD5AFC00C51A21 /* Services */,
 				5951C22B22FA030300F100F9 /* Models */,
@@ -141,7 +156,6 @@
 		5975776022FD5AFC00C51A21 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				59619C0F22FBFD65000324F6 /* CoreDataService.swift */,
 				599C447922FCC912005C30A7 /* DateConvertService.swift */,
 				59806BF223008AA00051277B /* UserNotificationService.swift */,
 				5950884F230337D1007658A9 /* ApiService.swift */,
@@ -155,7 +169,6 @@
 			children = (
 				5951C1F922F9F02100F100F9 /* AppDelegate.swift */,
 				5951C20822F9F02100F100F9 /* Info.plist */,
-				5951C20022F9F02100F100F9 /* MyGarden.xcdatamodeld */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -174,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				5951C20322F9F02100F100F9 /* Assets.xcassets */,
+				590AE66F2304687D0089E7BE /* NetworkConstants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -319,10 +333,12 @@
 				59508854230347FA007658A9 /* PlantEntry.swift in Sources */,
 				599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */,
 				59EEE343230295F700F3DAC1 /* WaterNotificationCell.swift in Sources */,
+				590AE6752304826B0089E7BE /* DataProvider.swift in Sources */,
 				59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */,
 				591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
-				59619C1022FBFD65000324F6 /* CoreDataService.swift in Sources */,
+				590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */,
+				590AE673230482070089E7BE /* CoreDataStack.swift in Sources */,
 				59E66D122301DF9500791DDD /* PlantDetailFieldCell.swift in Sources */,
 				59508850230337D1007658A9 /* ApiService.swift in Sources */,
 				599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */,

@@ -11,7 +11,6 @@ import CoreData
 
 enum MainViewSegue: String {
     case plantDetail = "showPlantDetail"
-    case newPlant = "showNewPlant"
 }
 
 class MainViewController: UIViewController {
@@ -25,24 +24,14 @@ class MainViewController: UIViewController {
     
     var plants: [Plant] = []
     var waterNotificationPlants: [Plant] = []
-    var plantEntries: [PlantEntry] = []
+    
+    let dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        plants = CoreDataService.getAllPlants()
-        waterNotificationPlants = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())
-        loadWikiInforamtion()
     }
-    
-    func loadWikiInforamtion() {
-        ApiService.getWikiInfo(onCompleted: { (plantEntries) in
-            self.plantEntries = plantEntries
-        }) { (error) in
-            print("ohhhh")
-        }
-    }
-    
+
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -68,21 +57,17 @@ class MainViewController: UIViewController {
                     return
             }
             vc.plant = plant
-        case .newPlant:
-            guard let vc = segue.destination as? EditPlantViewController else {
-                return
-            }
-            vc.plantEntries = plantEntries
         }
     }
     
     func updateTableView() {
-        plants = CoreDataService.getAllPlants()
-        tableView.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        tableView.reloadData()
+        self.dataProvider.getAllPlants { (plants) in
+            self.plants = plants
+            self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     func formWaterNotificationPlatsArray(plants: [Plant]) -> [Plant] {

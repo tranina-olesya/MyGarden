@@ -17,19 +17,36 @@ class EditPlantViewController: UIViewController {
    
     @IBOutlet weak var tableView: UITableView!
     
+    let dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
+    
+    var plantEntries: [PlantEntry] = []
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    var plantEntries: [PlantEntry] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureKeyboardEvents()
         configureTapRecognizer()
         configureTableView()
+        loadWikiInforamtion()
+    }
+    
+    func loadWikiInforamtion() {
+        ApiService.getWikiInfo(onCompleted: { (plantEntries) in
+            self.plantEntries = plantEntries
+            DispatchQueue.main.async {
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell {
+                    cell.plantEntries = plantEntries
+                    cell.plantTextField.isEnabled = true
+                }
+            }
+        }) { (error) in
+            print("Unable to load plant entries from Wiki")
+        }
     }
     
     func configureTableView() {
@@ -54,12 +71,8 @@ class EditPlantViewController: UIViewController {
             let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
             let plantEntry = plantEntries.first(where: { $0.name == cell.plantTextField.text }){
             if let pathUrl = ImageSaveService.saveImage(name: name, image: image) {
-                let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
-                if success {
-                    navigationController?.popViewController(animated: true)
-                } else {
-                    //
-                }
+                dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
+                navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -112,6 +125,7 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configureCell(plantEntries: plantEntries)
+            cell.plantTextField.isEnabled = plantEntries.count > 0
             return cell
         }
     }
@@ -125,6 +139,4 @@ extension EditPlantViewController: PlantImageCellDelegate {
     func dismiss(animated: Bool) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }

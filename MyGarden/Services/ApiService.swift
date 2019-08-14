@@ -13,7 +13,32 @@ class ApiService {
         onCompleted: @escaping ([PlantEntry]) -> Void,
         onError: @escaping (Error) -> Void
         ) {
-        let url = URL(string: "https://ru.wikipedia.org/w/api.php?action=parse&format=json&page=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BC%D0%BD%D0%B0%D1%82%D0%BD%D1%8B%D1%85_%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D0%B9&section=1&prop=wikitext")!
+        guard let url = URL(string: "\(NetWorkConstants.baseUrl)?action=parse&format=json&page=%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BC%D0%BD%D0%B0%D1%82%D0%BD%D1%8B%D1%85_%D1%80%D0%B0%D1%81%D1%82%D0%B5%D0%BD%D0%B8%D0%B9&section=1&prop=wikitext") else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        if let data = URLCache.shared.cachedResponse(for: request)?.data,
+            let wikiEntry = try? JSONDecoder().decode(WikiEntry.self, from: data) {
+            onCompleted(convertToPlantEtries(rawString: wikiEntry.parse.wikiText.text))
+        } else {
+            loadFromApi(
+                url: url,
+                onCompleted: { (plantEntries) in
+                    onCompleted(plantEntries)
+                }, onError: { (error) in
+                    onError(error)
+            })
+        }
+    }
+    
+    static func loadFromApi(
+        url: URL,
+        onCompleted: @escaping ([PlantEntry]) -> Void,
+        onError: @escaping (Error) -> Void
+        ) {
+        let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 onError(error)
@@ -21,11 +46,16 @@ class ApiService {
             }
             
             guard let data = data,
+                let response = response,
                 let wikiEntry = try? JSONDecoder().decode(WikiEntry.self, from: data)
                 else {
                     onError(NSError())
                     return
             }
+            
+            let cacheData = CachedURLResponse(response: response, data: data)
+            URLCache.shared.storeCachedResponse(cacheData, for: request)
+            
             onCompleted(convertToPlantEtries(rawString: wikiEntry.parse.wikiText.text))
         }
         task.resume()
