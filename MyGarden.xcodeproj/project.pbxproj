@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66D2303F1BC0089E7BE /* UIImage.swift */; };
 		591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */; };
 		591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F822FF5E1B003BA271 /* PlantsCell.swift */; };
 		59508850230337D1007658A9 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950884F230337D1007658A9 /* ApiService.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590AE66D2303F1BC0089E7BE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPlantsCell.swift; sourceTree = "<group>"; };
 		591E18F822FF5E1B003BA271 /* PlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCell.swift; sourceTree = "<group>"; };
 		5950884F230337D1007658A9 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				59E66CFF2301C0E300791DDD /* UINavigationController.swift */,
+				590AE66D2303F1BC0089E7BE /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				595088522303386A007658A9 /* WikiEntries.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
 				595088562303502D007658A9 /* ImageSaveService.swift in Sources */,
+				590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */,
 				59806BF323008AA00051277B /* UserNotificationService.swift in Sources */,
 				59508854230347FA007658A9 /* PlantEntry.swift in Sources */,
 				599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */,

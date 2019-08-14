@@ -18,12 +18,13 @@ class WaterNotificationCell: UICollectionViewCell {
     
     var plant: Plant? {
         didSet {
-            nameLabel.text = plant?.name
-            if let days = getDaysFromLastWatered() {
-                daysLabel.text = days < 2 ? "Today" : "\(days) days"
-            } else {
-                daysLabel.text = ""
+            guard let name = plant?.name,
+                let days = getDaysFromLastWatered() else {
+                return
             }
+            nameLabel.text = name
+            daysLabel.text = days < 2 ? "Today" : "\(days) days"
+            plantImageView.image = ImageSaveService.getSavedImage(name: name)
         }
     }
     

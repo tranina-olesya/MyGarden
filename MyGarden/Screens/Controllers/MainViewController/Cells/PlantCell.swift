@@ -16,8 +16,11 @@ class PlantCell: UICollectionViewCell {
     
     var plant: Plant? {
         didSet {
-            //imageView.image =
-            nameLabel.text = plant?.name
+            guard let name = plant?.name else {
+                return
+            }
+            nameLabel.text = name
+            imageView.image = ImageSaveService.getSavedImage(name: name)
         }
     }
 }

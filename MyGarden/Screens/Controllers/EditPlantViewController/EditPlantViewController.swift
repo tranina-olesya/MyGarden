@@ -45,7 +45,7 @@ class EditPlantViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         if
             let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
-            let image = imageCell.plantImageView.image,
+            let image = imageCell.plantImageView.image?.fixOrientation(),
             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell,
             let name = cell.nameTextField.text,
             let description = cell.descriptionTextField.text,
