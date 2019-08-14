@@ -17,6 +17,8 @@ class PlantDetailViewController: UIViewController {
         case wateringTime
         case waterSchedule
         case dayPotted
+        case plantKind
+        case wikiDescription
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +46,7 @@ class PlantDetailViewController: UIViewController {
 
 extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Sections.allCases.count
+        return plant?.plantKind != nil ? Sections.allCases.count : Sections.allCases.count - 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,6 +102,22 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.configureCell(fieldName: "Water Schedule", fieldValue: String(waterSchedule))
             }
             return cell
+        case .plantKind:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantDetailFieldCell", for: indexPath) as? PlantDetailFieldCell else {
+                return UITableViewCell()
+            }
+            if let plantKind = plant?.plantKind {
+                cell.configureCell(fieldName: "Plant", fieldValue: plantKind)
+            }
+            return cell
+        case .wikiDescription:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantDetailFieldCell", for: indexPath) as? PlantDetailFieldCell else {
+                return UITableViewCell()
+            }
+            if let wikiDescription = plant?.wikiDescription {
+                cell.configureCell(fieldName: "Wiki description", fieldValue: wikiDescription)
+            }
+            return cell
         }
     }
     
@@ -111,8 +129,10 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
         switch sectionType {
         case .image:
             return 300.0
+        case .wikiDescription:
+            return 200.0
         default:
-            return 98.0
+            return 78.0
         }
     }
 }
