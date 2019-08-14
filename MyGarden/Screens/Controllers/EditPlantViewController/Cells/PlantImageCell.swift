@@ -14,6 +14,8 @@ class PlantImageCell: UITableViewCell {
     
     weak var delegate: PlantImageCellDelegate?
     
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
     @IBAction func choosePicture(_ sender: Any) {
         let actionSheet = UIAlertController(title: "Add image", message: nil, preferredStyle: .actionSheet)
 
@@ -41,6 +43,11 @@ class PlantImageCell: UITableViewCell {
     
     func configureCell(image: UIImage?) {
         plantImageView.image = image
+    }
+    
+    func handleScroll(offset: CGFloat) {
+        clipsToBounds = offset >= 0
+        heightConstraint.constant = 300 - offset
     }
 }
 

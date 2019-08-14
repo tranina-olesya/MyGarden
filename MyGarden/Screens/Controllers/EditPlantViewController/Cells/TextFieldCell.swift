@@ -60,6 +60,9 @@ class TextFieldCell: UITableViewCell {
     func configureCell(plantEntries: [PlantEntry]) {
         self.plantEntries = plantEntries
         configurePlantKindPicker()
+        if plantEntries.count > 0 {
+            plantTextField.text = plantEntries[0].name
+        }
     }
     
     func initUI() {

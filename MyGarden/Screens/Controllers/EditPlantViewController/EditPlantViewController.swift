@@ -33,6 +33,14 @@ class EditPlantViewController: UIViewController {
         configureTapRecognizer()
         configureTableView()
         loadWikiInforamtion()
+        navigationController?.designTransparent()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantImageCell {
+            cell.handleScroll(offset: offset)
+        }
     }
     
     func loadWikiInforamtion() {
@@ -60,12 +68,28 @@ class EditPlantViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if
-            let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
-            let image = imageCell.plantImageView.image?.fixOrientation(),
-            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell,
+        guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
+            let image = imageCell.plantImageView.image?.fixOrientation() else {
+            let alert = UIAlertController(title: "No image", message: "Please add an image of your plant", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.dismiss(animated: true)
+                }))
+                present(alert, animated: true, completion: nil)
+                return
+        }
+        
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell,
             let name = cell.nameTextField.text,
-            let description = cell.descriptionTextField.text,
+            !name.isEmpty else {
+            let alert = UIAlertController(title: "No name", message: "Please add a name for your plant", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.dismiss(animated: true)
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if let description = cell.descriptionTextField.text,
             let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
             let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
             let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
@@ -92,10 +116,12 @@ class EditPlantViewController: UIViewController {
             return
         }
         view.frame.origin.y = -keyboardRect.height
+        navigationController?.navigationBar.isHidden = true
     }
 
     @objc func keyboardWillHide(notification: Notification) {
         view.frame.origin.y = 0
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
@@ -127,6 +153,19 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(plantEntries: plantEntries)
             cell.plantTextField.isEnabled = plantEntries.count > 0
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let sectionType = Sections(rawValue: indexPath.section) else {
+            return 0.0
+        }
+        
+        switch sectionType {
+        case .image:
+            return 300.0
+        case .fields:
+            return 520.0
         }
     }
 }
