@@ -22,11 +22,3 @@ extension Plant {
         }
     }
 }
-
-var waterScheduleValues: [String] = {
-    var values = ["Every day"]
-    for day in 2...14 {
-        values.append("Every \(day) days")
-    }
-    return values
-}()

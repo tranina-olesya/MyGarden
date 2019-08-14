@@ -158,7 +158,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <segue destination="d3k-29-jfU" kind="show" id="nnT-wi-WVD"/>
+                                                        <segue destination="d3k-29-jfU" kind="show" identifier="showNewPlant" id="NL8-Zw-oJh"/>
                                                     </connections>
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="01v-Xk-W2X">
@@ -324,141 +324,146 @@
                                             <outlet property="plantImageView" destination="wou-pL-MB0" id="TIx-Gf-3XC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="114" id="6fO-80-SxL" customClass="TextFieldCell" customModule="MyGarden" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="414" height="114"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="524" id="6fO-80-SxL" customClass="TextFieldCell" customModule="MyGarden" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="414" height="524"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6fO-80-SxL" id="ZpS-hq-f87">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="524"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-rh-zK1">
-                                                    <rect key="frame" x="20" y="20" width="374" height="25.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I72-8O-CL2">
-                                                    <rect key="frame" x="20" y="55.333333333333343" width="374" height="38.666666666666657"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGH-6s-FH8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="523.33333333333337"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-rh-zK1">
+                                                            <rect key="frame" x="20" y="20" width="374" height="25.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I72-8O-CL2">
+                                                            <rect key="frame" x="20" y="55.333333333333329" width="374" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKD-k9-Sge">
+                                                            <rect key="frame" x="20" y="105.33333333333334" width="374" height="25.333333333333343"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gdt-qm-UcC">
+                                                            <rect key="frame" x="20" y="140.66666666666666" width="374" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Plant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBb-cd-56E">
+                                                            <rect key="frame" x="20" y="190.66666666666666" width="374" height="26"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TaU-2L-OMy">
+                                                            <rect key="frame" x="20" y="226.66666666666666" width="374" height="29.999999999999972"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watering Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfA-oi-X59">
+                                                            <rect key="frame" x="20" y="276.66666666666669" width="374" height="25.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Morning" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhp-TH-s0c">
+                                                            <rect key="frame" x="20" y="312" width="374" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-0g-Biz">
+                                                            <rect key="frame" x="20" y="362" width="374" height="25.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ln-O3-IJc">
+                                                            <rect key="frame" x="20" y="397.33333333333337" width="374" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day Potted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9w-jX-r8b">
+                                                            <rect key="frame" x="20" y="447.33333333333337" width="374" height="26"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPJ-J9-JzR">
+                                                            <rect key="frame" x="20" y="483.33333333333337" width="374" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Gdt-qm-UcC" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="2oA-dt-fD5"/>
+                                                        <constraint firstAttribute="height" constant="514" id="3fi-6v-iFP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LDO-rh-zK1" secondAttribute="trailing" constant="20" id="5vV-Yl-ayB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="AfA-oi-X59" secondAttribute="trailing" constant="20" id="6J6-gH-Hbz"/>
+                                                        <constraint firstItem="HKD-k9-Sge" firstAttribute="top" secondItem="I72-8O-CL2" secondAttribute="bottom" constant="20" id="8Zh-Jk-0B0"/>
+                                                        <constraint firstItem="RPJ-J9-JzR" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="98f-0r-RTa"/>
+                                                        <constraint firstItem="Gdt-qm-UcC" firstAttribute="top" secondItem="HKD-k9-Sge" secondAttribute="bottom" constant="10" id="CTl-Uu-mFf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="0Ln-O3-IJc" secondAttribute="trailing" constant="20" id="Gmz-LT-Pch"/>
+                                                        <constraint firstAttribute="trailing" secondItem="mhp-TH-s0c" secondAttribute="trailing" constant="20" id="JNJ-9b-9P0"/>
+                                                        <constraint firstItem="cBb-cd-56E" firstAttribute="top" secondItem="Gdt-qm-UcC" secondAttribute="bottom" constant="20" id="LpK-ag-D2r"/>
+                                                        <constraint firstItem="TaU-2L-OMy" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="PkQ-Tl-4dP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RPJ-J9-JzR" secondAttribute="trailing" constant="20" id="QNn-XW-NdM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RPJ-J9-JzR" secondAttribute="bottom" constant="10" id="QZi-VJ-mkr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="HKD-k9-Sge" secondAttribute="trailing" constant="20" id="Rtv-6X-Zp0"/>
+                                                        <constraint firstItem="cMJ-0g-Biz" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="Si2-ad-S3O"/>
+                                                        <constraint firstItem="A9w-jX-r8b" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="T82-tN-Vap"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TaU-2L-OMy" secondAttribute="trailing" constant="20" id="Trz-s6-baI"/>
+                                                        <constraint firstItem="0Ln-O3-IJc" firstAttribute="top" secondItem="cMJ-0g-Biz" secondAttribute="bottom" constant="10" id="UIX-XY-xPJ"/>
+                                                        <constraint firstItem="AfA-oi-X59" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="VbK-Am-jfM"/>
+                                                        <constraint firstItem="I72-8O-CL2" firstAttribute="top" secondItem="LDO-rh-zK1" secondAttribute="bottom" constant="10" id="WMT-Eo-xga"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cBb-cd-56E" secondAttribute="trailing" constant="20" id="dKt-6E-Z3K"/>
+                                                        <constraint firstItem="RPJ-J9-JzR" firstAttribute="top" secondItem="A9w-jX-r8b" secondAttribute="bottom" constant="10" id="eDC-QA-or6"/>
+                                                        <constraint firstItem="I72-8O-CL2" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="evE-jW-InW"/>
+                                                        <constraint firstItem="LDO-rh-zK1" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="h0a-jw-O2I"/>
+                                                        <constraint firstItem="mhp-TH-s0c" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="hsH-it-5ZL"/>
+                                                        <constraint firstItem="A9w-jX-r8b" firstAttribute="top" secondItem="0Ln-O3-IJc" secondAttribute="bottom" constant="20" id="i15-Th-XEF"/>
+                                                        <constraint firstItem="LDO-rh-zK1" firstAttribute="top" secondItem="VGH-6s-FH8" secondAttribute="top" constant="20" id="i8B-ae-SbP"/>
+                                                        <constraint firstItem="0Ln-O3-IJc" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="lyZ-Z3-nzL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="A9w-jX-r8b" secondAttribute="trailing" constant="20" id="nyY-8s-dOR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="I72-8O-CL2" secondAttribute="trailing" constant="20" id="pQm-Y3-7FA"/>
+                                                        <constraint firstItem="cMJ-0g-Biz" firstAttribute="top" secondItem="mhp-TH-s0c" secondAttribute="bottom" constant="20" id="rAH-lR-z0q"/>
+                                                        <constraint firstItem="mhp-TH-s0c" firstAttribute="top" secondItem="AfA-oi-X59" secondAttribute="bottom" constant="10" id="rNu-Rx-FC9"/>
+                                                        <constraint firstItem="HKD-k9-Sge" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="s2N-pj-ZCx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Gdt-qm-UcC" secondAttribute="trailing" constant="20" id="sVM-49-b7q"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cMJ-0g-Biz" secondAttribute="trailing" constant="20" id="sak-kl-QgF"/>
+                                                        <constraint firstItem="AfA-oi-X59" firstAttribute="top" secondItem="TaU-2L-OMy" secondAttribute="bottom" constant="20" id="sfi-Ui-gz3"/>
+                                                        <constraint firstItem="cBb-cd-56E" firstAttribute="leading" secondItem="VGH-6s-FH8" secondAttribute="leading" constant="20" id="uA5-s2-feT"/>
+                                                        <constraint firstItem="TaU-2L-OMy" firstAttribute="top" secondItem="cBb-cd-56E" secondAttribute="bottom" constant="10" id="z5j-WK-Egs"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="LDO-rh-zK1" firstAttribute="top" secondItem="ZpS-hq-f87" secondAttribute="top" constant="20" id="0ab-HL-KqA"/>
-                                                <constraint firstAttribute="trailing" secondItem="I72-8O-CL2" secondAttribute="trailing" constant="20" id="56y-aj-xtI"/>
-                                                <constraint firstAttribute="bottom" secondItem="I72-8O-CL2" secondAttribute="bottom" constant="20" id="5OA-PT-0L6"/>
-                                                <constraint firstAttribute="trailing" secondItem="LDO-rh-zK1" secondAttribute="trailing" constant="20" id="dz5-Se-OTT"/>
-                                                <constraint firstItem="I72-8O-CL2" firstAttribute="top" secondItem="LDO-rh-zK1" secondAttribute="bottom" constant="10" id="qBM-TI-P3u"/>
-                                                <constraint firstItem="LDO-rh-zK1" firstAttribute="leading" secondItem="ZpS-hq-f87" secondAttribute="leading" constant="20" id="u1c-Ia-SJA"/>
-                                                <constraint firstItem="I72-8O-CL2" firstAttribute="leading" secondItem="ZpS-hq-f87" secondAttribute="leading" constant="20" id="zqt-Cw-pwN"/>
+                                                <constraint firstItem="VGH-6s-FH8" firstAttribute="top" secondItem="ZpS-hq-f87" secondAttribute="top" id="44R-vs-5mE"/>
+                                                <constraint firstAttribute="trailing" secondItem="VGH-6s-FH8" secondAttribute="trailing" id="T7S-53-D0H"/>
+                                                <constraint firstItem="VGH-6s-FH8" firstAttribute="leading" secondItem="ZpS-hq-f87" secondAttribute="leading" id="YcI-38-6Uu"/>
+                                                <constraint firstAttribute="bottom" secondItem="VGH-6s-FH8" secondAttribute="bottom" id="oFN-MH-bR9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="nameLabel" destination="LDO-rh-zK1" id="enP-Gt-Vz9"/>
-                                            <outlet property="valueTextField" destination="I72-8O-CL2" id="99b-SG-c6G"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WaterSchedulePickerCell" rowHeight="114" id="W83-ak-rq0" customClass="WaterSchedulePickerCell" customModule="MyGarden" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="442" width="414" height="114"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W83-ak-rq0" id="8UL-lq-CAY">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-0g-Biz">
-                                                    <rect key="frame" x="20" y="20" width="374" height="25.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ln-O3-IJc">
-                                                    <rect key="frame" x="20" y="55.333333333333343" width="374" height="38.666666666666657"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="cMJ-0g-Biz" secondAttribute="trailing" constant="20" id="3qv-Vt-7fk"/>
-                                                <constraint firstItem="cMJ-0g-Biz" firstAttribute="top" secondItem="8UL-lq-CAY" secondAttribute="top" constant="20" id="83W-4T-HfD"/>
-                                                <constraint firstAttribute="bottom" secondItem="0Ln-O3-IJc" secondAttribute="bottom" constant="20" id="Y65-gS-uTW"/>
-                                                <constraint firstItem="cMJ-0g-Biz" firstAttribute="leading" secondItem="8UL-lq-CAY" secondAttribute="leading" constant="20" id="faa-UJ-Xsu"/>
-                                                <constraint firstItem="0Ln-O3-IJc" firstAttribute="leading" secondItem="8UL-lq-CAY" secondAttribute="leading" constant="20" id="jVM-m9-g79"/>
-                                                <constraint firstAttribute="trailing" secondItem="0Ln-O3-IJc" secondAttribute="trailing" constant="20" id="l6h-mI-dbi"/>
-                                                <constraint firstItem="0Ln-O3-IJc" firstAttribute="top" secondItem="cMJ-0g-Biz" secondAttribute="bottom" constant="10" id="mjf-Of-e8h"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="waterScheduleTextField" destination="0Ln-O3-IJc" id="4cx-dp-YTf"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WateringTimePickerCell" rowHeight="114" id="bq6-j3-hKp" customClass="WateringTimePickerCell" customModule="MyGarden" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="556" width="414" height="114"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bq6-j3-hKp" id="0K0-If-Rh2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watering Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfA-oi-X59">
-                                                    <rect key="frame" x="20" y="20" width="374" height="25.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Morning" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhp-TH-s0c">
-                                                    <rect key="frame" x="20" y="55.333333333333343" width="374" height="38.666666666666657"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="mhp-TH-s0c" firstAttribute="leading" secondItem="0K0-If-Rh2" secondAttribute="leading" constant="20" id="0G2-5v-pPz"/>
-                                                <constraint firstItem="AfA-oi-X59" firstAttribute="top" secondItem="0K0-If-Rh2" secondAttribute="top" constant="20" id="5T9-ud-hf7"/>
-                                                <constraint firstItem="AfA-oi-X59" firstAttribute="leading" secondItem="0K0-If-Rh2" secondAttribute="leading" constant="20" id="bhr-r9-lHC"/>
-                                                <constraint firstItem="mhp-TH-s0c" firstAttribute="top" secondItem="AfA-oi-X59" secondAttribute="bottom" constant="10" id="i2E-lp-AnV"/>
-                                                <constraint firstAttribute="trailing" secondItem="AfA-oi-X59" secondAttribute="trailing" constant="20" id="lm4-lj-PDU"/>
-                                                <constraint firstAttribute="trailing" secondItem="mhp-TH-s0c" secondAttribute="trailing" constant="20" id="rjN-6e-jls"/>
-                                                <constraint firstAttribute="bottom" secondItem="mhp-TH-s0c" secondAttribute="bottom" constant="20" id="uuE-9v-ilU"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="wateringTimeTextField" destination="mhp-TH-s0c" id="i0M-ca-7VJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatePickerCell" rowHeight="114" id="YFN-EI-EZq" customClass="DatePickerCell" customModule="MyGarden" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="670" width="414" height="114"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YFN-EI-EZq" id="dAq-kQ-F76">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day Potted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9w-jX-r8b">
-                                                    <rect key="frame" x="20" y="20" width="374" height="26"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RPJ-J9-JzR">
-                                                    <rect key="frame" x="20" y="56" width="374" height="37.666666666666657"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="A9w-jX-r8b" firstAttribute="leading" secondItem="dAq-kQ-F76" secondAttribute="leading" constant="20" id="55s-Vz-qGK"/>
-                                                <constraint firstAttribute="bottom" secondItem="RPJ-J9-JzR" secondAttribute="bottom" constant="20" id="DrB-xM-Fz4"/>
-                                                <constraint firstItem="RPJ-J9-JzR" firstAttribute="top" secondItem="A9w-jX-r8b" secondAttribute="bottom" constant="10" id="MBZ-7S-rq4"/>
-                                                <constraint firstAttribute="trailing" secondItem="A9w-jX-r8b" secondAttribute="trailing" constant="20" id="PRf-yw-uYX"/>
-                                                <constraint firstItem="RPJ-J9-JzR" firstAttribute="leading" secondItem="dAq-kQ-F76" secondAttribute="leading" constant="20" id="mGC-Kp-x1h"/>
-                                                <constraint firstItem="A9w-jX-r8b" firstAttribute="top" secondItem="dAq-kQ-F76" secondAttribute="top" constant="20" id="p6f-sZ-vYe"/>
-                                                <constraint firstAttribute="trailing" secondItem="RPJ-J9-JzR" secondAttribute="trailing" constant="20" id="yMR-7X-U3R"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="dayPottedTextField" destination="RPJ-J9-JzR" id="1yG-tD-0Iz"/>
+                                            <outlet property="dayPottedTextField" destination="RPJ-J9-JzR" id="jir-Jq-D69"/>
+                                            <outlet property="descriptionTextField" destination="Gdt-qm-UcC" id="C3M-cR-TeR"/>
+                                            <outlet property="nameTextField" destination="I72-8O-CL2" id="IMr-G6-g32"/>
+                                            <outlet property="plantTextField" destination="TaU-2L-OMy" id="qGL-dH-aHF"/>
+                                            <outlet property="waterScheduleTextField" destination="0Ln-O3-IJc" id="3XU-vE-Prv"/>
+                                            <outlet property="wateringTimeTextField" destination="mhp-TH-s0c" id="4XK-nb-eiJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -623,6 +628,6 @@
         <image name="icons8-plus-48" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2rs-61-WLO"/>
+        <segue reference="NL8-Zw-oJh"/>
     </inferredMetricsTieBreakers>
 </document>

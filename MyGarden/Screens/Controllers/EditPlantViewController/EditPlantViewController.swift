@@ -12,11 +12,7 @@ class EditPlantViewController: UIViewController {
     
     private enum Sections: Int, CaseIterable {
         case image
-        case name
-        case description
-        case wateringTime
-        case waterSchedule
-        case dayPotted
+        case fields
     }
    
     @IBOutlet weak var tableView: UITableView!
@@ -26,6 +22,8 @@ class EditPlantViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
+    
+    var plantEntries: [PlantEntry] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,27 +46,22 @@ class EditPlantViewController: UIViewController {
         if
             let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
             let image = imageCell.plantImageView.image,
-            let nameCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.name.rawValue)) as? TextFieldCell,
-            let name = nameCell.valueTextField.text,
-            let descriptionCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.description.rawValue)) as? TextFieldCell,
-            let description = descriptionCell.valueTextField.text,
-            let wateringTimeCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.wateringTime.rawValue)) as? WateringTimePickerCell,
-            let wateringTime = WateringTime(rawValue: wateringTimeCell.wateringTimeTextField.text ?? ""),
-            let waterScheduleCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.waterSchedule.rawValue)) as? WaterSchedulePickerCell,
-            let waterSchedule = Int(waterScheduleCell.waterScheduleTextField.text ?? ""),
-            let dayPottedCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.dayPotted.rawValue)) as? DatePickerCell,
-            let dayPotted = DateConvertService.convertToDate(dateString: dayPottedCell.dayPottedTextField.text ?? "")
-        {
+            let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell,
+            let name = cell.nameTextField.text,
+            let description = cell.descriptionTextField.text,
+            let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
+            let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
+            let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
+            let plantEntry = plantEntries.first(where: { $0.name == cell.plantTextField.text }){
             if let pathUrl = ImageSaveService.saveImage(name: name, image: image) {
-                let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl)
+                let success = CoreDataService.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
                 if success {
-                    //
+                    navigationController?.popViewController(animated: true)
                 } else {
                     //
                 }
             }
         }
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func viewTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -114,32 +107,11 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.delegate = self
             return cell
-        case .name:
+        case .fields:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell else {
                 return UITableViewCell()
             }
-            cell.configureCell(name: "Name")
-            return cell
-        case .description:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell else {
-                return UITableViewCell()
-            }
-            cell.configureCell(name: "Description")
-            return cell
-        case .wateringTime:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WateringTimePickerCell", for: indexPath) as? WateringTimePickerCell else {
-                return UITableViewCell()
-            }
-            return cell
-        case .dayPotted:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DatePickerCell", for: indexPath) as? DatePickerCell else {
-                return UITableViewCell()
-            }
-            return cell
-        case .waterSchedule:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WaterSchedulePickerCell", for: indexPath) as? WaterSchedulePickerCell else {
-                return UITableViewCell()
-            }
+            cell.configureCell(plantEntries: plantEntries)
             return cell
         }
     }

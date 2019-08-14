@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 
 enum MainViewSegue: String {
-    case plant = "showPlantDetail"
+    case plantDetail = "showPlantDetail"
+    case newPlant = "showNewPlant"
 }
 
 class MainViewController: UIViewController {
@@ -22,21 +23,24 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var plants: [Plant]?
+    var plants: [Plant] = []
     var waterNotificationPlants: [Plant] = []
+    var plantEntries: [PlantEntry] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        ApiService.getWikiInfo(onCompleted: { (plantEntries) in
-//            plantEntries.forEach { print("\($0.name)\n\($0.description ?? "--")\n") }
-//        }) { (error) in
-//            print("")
-//        }
-//
         configureTableView()
         plants = CoreDataService.getAllPlants()
         waterNotificationPlants = formWaterNotificationPlatsArray(plants: CoreDataService.getAllPlants())
+        loadWikiInforamtion()
+    }
+    
+    func loadWikiInforamtion() {
+        ApiService.getWikiInfo(onCompleted: { (plantEntries) in
+            self.plantEntries = plantEntries
+        }) { (error) in
+            print("ohhhh")
+        }
     }
     
     func configureTableView() {
@@ -54,14 +58,21 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? ""),
-            let plant = sender as? Plant else {
+        guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? "") else {
             return
         }
         switch mainViewSegue {
-        case .plant:
-            let vc = segue.destination as? PlantDetailViewController
-            vc?.plant = plant
+        case .plantDetail:
+            guard let vc = segue.destination as? PlantDetailViewController,
+                let plant = sender as? Plant else {
+                    return
+            }
+            vc.plant = plant
+        case .newPlant:
+            guard let vc = segue.destination as? EditPlantViewController else {
+                return
+            }
+            vc.plantEntries = plantEntries
         }
     }
     
@@ -138,7 +149,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, Plants
         let screenWidth = view.frame.width
         let cellWidth = screenWidth / 2 - CGFloat(PlantsCell.cellMarginSize * 2)
         let cellHeight = cellWidth * PlantsCell.cellRatio + PlantsCell.cellMarginSize
-        return ceil(CGFloat(plants?.count ?? 0) / 2.0) * cellHeight
+        return ceil(CGFloat(plants.count) / 2.0) * cellHeight
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -158,6 +169,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, Plants
     }
     
     func didSelectedItem(indexPath: IndexPath) {
-        performSegue(withIdentifier: "showPlantDetail", sender: plants?[indexPath.row])
+        performSegue(withIdentifier: MainViewSegue.plantDetail.rawValue, sender: plants[indexPath.row])
     }
 }
