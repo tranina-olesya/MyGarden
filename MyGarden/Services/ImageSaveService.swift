@@ -25,10 +25,14 @@ class ImageSaveService {
         }
     }
     
-    static func getSavedImage(name: String) -> UIImage? {
-        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
-            return nil
+    static func getSavedImage(name: String, onComplete: @escaping (UIImage?) -> Void) {
+        let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
+        mySerialQueue.async {
+            guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+                onComplete(nil)
+                return
+            }
+            onComplete(UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent("\(name).png").path))
         }
-        return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent("\(name).png").path)
     }
 }

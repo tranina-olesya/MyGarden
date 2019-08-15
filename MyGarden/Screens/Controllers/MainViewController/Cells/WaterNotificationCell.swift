@@ -24,7 +24,12 @@ class WaterNotificationCell: UICollectionViewCell {
             }
             nameLabel.text = name
             daysLabel.text = days < 2 ? "Today" : "\(days) days"
-            plantImageView.image = ImageSaveService.getSavedImage(name: name)
+            ImageSaveService.getSavedImage(name: name) { (image) in
+                DispatchQueue.main.async {
+                    self.plantImageView.image = image
+                }
+            }
+    
         }
     }
     

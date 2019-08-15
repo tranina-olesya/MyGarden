@@ -20,7 +20,11 @@ class PlantCell: UICollectionViewCell {
                 return
             }
             nameLabel.text = name
-            imageView.image = ImageSaveService.getSavedImage(name: name)
+            ImageSaveService.getSavedImage(name: name) { (image) in
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
         }
     }
 }

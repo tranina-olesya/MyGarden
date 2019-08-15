@@ -48,12 +48,14 @@ class TextFieldCell: UITableViewCell {
     
     var plant: Plant? {
         didSet {
-            nameTextField.text = plant?.name
-            descriptionTextField.text = plant?.descriptionText
-            plantTextField.text = plant?.plantKind
-            wateringTimeTextField.text = plant?.wateringTime.rawValue
-            waterScheduleTextField.text = String(plant?.waterSchedule ?? 1)
-            dayPottedTextField.text = DateConvertService.convertToString(date: plant?.dayPotted ?? Date())
+            if let plant = plant {
+                nameTextField.text = plant.name
+                descriptionTextField.text = plant.descriptionText
+                plantTextField.text = plant.plantKind
+                wateringTimeTextField.text = plant.wateringTime.rawValue
+                waterScheduleTextField.text = String(plant.waterSchedule)
+                dayPottedTextField.text = DateConvertService.convertToString(date: plant.dayPotted ?? Date())
+            }
         }
     }
 

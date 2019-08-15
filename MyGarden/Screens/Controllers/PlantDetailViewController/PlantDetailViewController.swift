@@ -81,9 +81,14 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantDetailImageCell", for: indexPath) as? PlantDetailImageCell else {
                 return UITableViewCell()
             }
-            if let name = plant?.name,
-                let photo = ImageSaveService.getSavedImage(name: name) {
-                cell.configureCell(image: photo)
+            if let name = plant?.name {
+                ImageSaveService.getSavedImage(name: name) { (image) in
+                    DispatchQueue.main.async {
+                        if let image = image {
+                            cell.configureCell(image: image)
+                        }
+                    }
+                }
             }
             return cell
         case .name:
