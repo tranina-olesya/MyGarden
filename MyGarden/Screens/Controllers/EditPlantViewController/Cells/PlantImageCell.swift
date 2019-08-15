@@ -24,7 +24,6 @@ class PlantImageCell: UITableViewCell {
         }))
 
         actionSheet.addAction(UIAlertAction(title: "From gallery", style: .default, handler: { (action) in
-
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -37,6 +36,10 @@ class PlantImageCell: UITableViewCell {
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
             self.delegate?.presentView(imagePicker, animated: true)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Remove image", style: .destructive, handler: { (action) in
+            self.plantImageView?.image = UIImage()
         }))
         delegate?.presentView(actionSheet, animated: true)
     }

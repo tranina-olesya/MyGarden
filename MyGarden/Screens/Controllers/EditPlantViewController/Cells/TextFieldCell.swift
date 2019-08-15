@@ -45,6 +45,17 @@ class TextFieldCell: UITableViewCell {
         }
         return values
     }()
+    
+    var plant: Plant? {
+        didSet {
+            nameTextField.text = plant?.name
+            descriptionTextField.text = plant?.descriptionText
+            plantTextField.text = plant?.plantKind
+            wateringTimeTextField.text = plant?.wateringTime.rawValue
+            waterScheduleTextField.text = String(plant?.waterSchedule ?? 1)
+            dayPottedTextField.text = DateConvertService.convertToString(date: plant?.dayPotted ?? Date())
+        }
+    }
 
     var plantEntries: [PlantEntry] = []
     
@@ -57,8 +68,9 @@ class TextFieldCell: UITableViewCell {
         initUI()
     }
     
-    func configureCell(plantEntries: [PlantEntry]) {
+    func configureCell(plantEntries: [PlantEntry], plant: Plant?) {
         self.plantEntries = plantEntries
+        self.plant = plant
         configurePlantKindPicker()
         if plantEntries.count > 0 {
             plantTextField.text = plantEntries[0].name

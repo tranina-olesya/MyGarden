@@ -285,7 +285,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhJ-FZ-hLV">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wou-pL-MB0">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tiger_PNG23223" translatesAutoresizingMaskIntoConstraints="NO" id="wou-pL-MB0">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -353,7 +353,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I72-8O-CL2">
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I72-8O-CL2">
                                                             <rect key="frame" x="20" y="55" width="374" height="30"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -627,7 +627,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="T4z-f9-mhy">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="Vtu-c1-p8n" id="Lzt-v1-u5Y"/>
-                                <segue destination="d3k-29-jfU" kind="show" id="2rs-61-WLO"/>
+                                <segue destination="d3k-29-jfU" kind="show" identifier="showEditPlant" id="2rs-61-WLO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -642,6 +642,7 @@
     </scenes>
     <resources>
         <image name="icons8-plus-48" width="24" height="24"/>
+        <image name="tiger_PNG23223" width="640" height="766"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="2rs-61-WLO"/>

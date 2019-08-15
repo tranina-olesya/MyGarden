@@ -46,6 +46,11 @@ class MainViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let mainViewSegue = MainViewSegue(rawValue: segue.identifier ?? "") else {
             return
@@ -62,9 +67,9 @@ class MainViewController: UIViewController {
     
     func updateTableView() {
         self.dataProvider.getAllPlants { (plants) in
-            self.plants = plants
-            self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
             DispatchQueue.main.async {
+                self.plants = plants
+                self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
                 self.tableView.reloadData()
             }
         }
@@ -135,22 +140,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource, Plants
         let cellWidth = screenWidth / 2 - CGFloat(PlantsCell.cellMarginSize * 2)
         let cellHeight = cellWidth * PlantsCell.cellRatio + PlantsCell.cellMarginSize
         return ceil(CGFloat(plants.count) / 2.0) * cellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let sectionType = Sections(rawValue: indexPath.section) else {
-            return
-        }
-        
-        switch sectionType {
-        case .waterPlantsCell:
-            return
-        case .plantsCell:
-            guard let cell = cell as? PlantsCell else {
-                return
-            }
-            cell.configureCell(plants: plants)
-        }
     }
     
     func didSelectedItem(indexPath: IndexPath) {

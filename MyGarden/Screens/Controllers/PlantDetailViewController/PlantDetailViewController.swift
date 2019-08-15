@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum PlantDetailViewSegue: String {
+    case editPlant = "showEditPlant"
+}
+
 class PlantDetailViewController: UIViewController {
     
     private enum Sections: Int, CaseIterable {
@@ -40,6 +44,20 @@ class PlantDetailViewController: UIViewController {
         let offset = scrollView.contentOffset.y
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantDetailImageCell {
             cell.handleScroll(offset: offset)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let plantDetailSegue = PlantDetailViewSegue(rawValue: segue.identifier ?? "") else {
+            return
+        }
+        
+        switch plantDetailSegue {
+        case .editPlant:
+            guard let vc = segue.destination as? EditPlantViewController else {
+                return
+            }
+            vc.plant = plant
         }
     }
 }

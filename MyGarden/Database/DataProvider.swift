@@ -53,4 +53,16 @@ class DataProvider {
             }
         }
     }
+    
+    func savePlant(plant: Plant) {
+        let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
+        mySerialQueue.async {
+            do {
+                try self.context.save()
+                UserNotificationService.updateNotification(plant: plant)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

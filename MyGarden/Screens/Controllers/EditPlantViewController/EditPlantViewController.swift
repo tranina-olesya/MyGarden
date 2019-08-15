@@ -21,6 +21,8 @@ class EditPlantViewController: UIViewController {
     
     var plantEntries: [PlantEntry] = []
     
+    var plant: Plant?
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -50,6 +52,7 @@ class EditPlantViewController: UIViewController {
                 if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell {
                     cell.plantEntries = plantEntries
                     cell.plantTextField.isEnabled = true
+                    cell.plantTextField.text = plantEntries[0].name
                 }
             }
         }) { (error) in
@@ -71,9 +74,7 @@ class EditPlantViewController: UIViewController {
         guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
             let image = imageCell.plantImageView.image?.fixOrientation() else {
             let alert = UIAlertController(title: "No image", message: "Please add an image of your plant", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.dismiss(animated: true)
-                }))
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
                 return
         }
@@ -82,9 +83,7 @@ class EditPlantViewController: UIViewController {
             let name = cell.nameTextField.text,
             !name.isEmpty else {
             let alert = UIAlertController(title: "No name", message: "Please add a name for your plant", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.dismiss(animated: true)
-            }))
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
@@ -95,8 +94,21 @@ class EditPlantViewController: UIViewController {
             let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
             let plantEntry = plantEntries.first(where: { $0.name == cell.plantTextField.text }){
             if let pathUrl = ImageSaveService.saveImage(name: name, image: image) {
-                dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
-                navigationController?.popViewController(animated: true)
+                if let plant = plant {
+                    plant.name = name
+                    plant.descriptionText = description
+                    plant.dayPotted = dayPotted
+                    plant.wateringTime = wateringTime
+                    plant.waterSchedule = Int16(waterSchedule)
+                    plant.lastWatered = Date()
+                    plant.photoUrl = pathUrl
+                    plant.plantKind = plantEntry.name
+                    plant.wikiDescription = plantEntry.description
+                    dataProvider.savePlant(plant: plant)
+                } else {
+                    dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
+                }
+                navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -150,7 +162,7 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell else {
                 return UITableViewCell()
             }
-            cell.configureCell(plantEntries: plantEntries)
+            cell.configureCell(plantEntries: plantEntries, plant: plant)
             cell.plantTextField.isEnabled = plantEntries.count > 0
             return cell
         }
