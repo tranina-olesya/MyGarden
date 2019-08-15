@@ -24,15 +24,7 @@ class MainViewController: UIViewController {
         case plantsCell
     }
     
-    @IBOutlet weak var waterTodayPlantsCollectionView: UICollectionView!
-    
     @IBOutlet weak var allPlantsCollectionView: UICollectionView!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var containerView: UIView!
-    
-    @IBOutlet weak var containerViewHeightContraint: NSLayoutConstraint!
     
     var plants: [Plant] = []
     var waterNotificationPlants: [Plant] = []
@@ -43,12 +35,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollectionViews()
+        configureCollectionView()
     }
 
-    func configureCollectionViews() {
-        waterTodayPlantsCollectionView.delegate = self
-        waterTodayPlantsCollectionView.dataSource = self
+    func configureCollectionView() {
         allPlantsCollectionView.delegate = self
         allPlantsCollectionView.dataSource = self
     }
@@ -77,10 +67,10 @@ class MainViewController: UIViewController {
         switch mainViewSegue {
         case .plantDetail:
             guard let vc = segue.destination as? PlantDetailViewController,
-                let plant = sender as? Plant else {
+                let index = allPlantsCollectionView.indexPathsForSelectedItems?.first?.row else {
                     return
             }
-            vc.plant = plant
+            vc.plant = plants[index]
         }
     }
     
@@ -91,17 +81,13 @@ class MainViewController: UIViewController {
         allPlantsCellSize = CGSize(width: cellWidth, height: cellHeight)
     }
     
-//    func updateCollectionViewHeight() -> CGFloat {
-//        ceil(CGFloat(plants.count) / 2.0) * allPlantsCellSize.height
-//    }
-    
     func updateCollectionViews() {
         self.dataProvider.getAllPlants { (plants) in
             DispatchQueue.main.async {
                 self.plants = plants
                 self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
+                print(self.waterNotificationPlants.count)
                 self.allPlantsCollectionView.reloadData()
-                self.waterTodayPlantsCollectionView.reloadData()
             }
         }
     }
@@ -136,27 +122,24 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == allPlantsCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantCell", for: indexPath) as? PlantCell else {
-                return UICollectionViewCell()
-            }
-            cell.plant = plants[indexPath.row]
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WaterNotificationCell", for: indexPath) as? WaterNotificationCell else {
-                return UICollectionViewCell()
-            }
-            cell.plant = waterNotificationPlants[indexPath.row]
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantCell", for: indexPath) as? PlantCell else {
+            return UICollectionViewCell()
         }
+        cell.plant = plants[indexPath.row]
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == allPlantsCollectionView {
             return allPlantsCellSize
-        } else {
-            return CGSize(width: 100, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "WaterTodayPlantsView", for: indexPath) as? WaterTodayPlantsView else {
+            return UICollectionReusableView()
         }
+        print(self.waterNotificationPlants.count)
+        view.configureView(plants: waterNotificationPlants)
+        return view
     }
 
 }

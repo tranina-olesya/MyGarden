@@ -13,7 +13,7 @@ class PlantDetailImageCell: UITableViewCell {
     @IBOutlet weak var plantImageView: UIImageView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-    func configureCell(image: UIImage) {
+    func configureCell(image: UIImage?) {
         plantImageView.image = image
     }
     

@@ -83,8 +83,11 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
             }
             if let name = plant?.name {
                 ImageStorageService.getSavedImage(name: name) { (image) in
+                    let resizedImage = image?.resize(width: 500)
                     DispatchQueue.main.async {
-                        if let image = image {
+                        if resizedImage != nil {
+                            cell.configureCell(image: resizedImage)
+                        } else {
                             cell.configureCell(image: image)
                         }
                     }

@@ -17,8 +17,7 @@ class DataProvider {
     }
     
     func getAllPlants(onComplete: @escaping ([Plant]) -> Void) {
-        let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
-        mySerialQueue.async {
+        DispatchQueue.global(qos: .background).async {
             do {
                 guard let result = try self.context.fetch(Plant.fetchRequest()) as? [Plant] else {
                     onComplete([])
@@ -34,7 +33,7 @@ class DataProvider {
     
     func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int, photoUrl: String, plantEntry: PlantEntry?) {
         let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
-        mySerialQueue.async {
+        DispatchQueue.global(qos: .background).async {
             do {
                 let plant = Plant(context: self.context)
                 plant.name = name
@@ -55,8 +54,7 @@ class DataProvider {
     }
     
     func savePlant(plant: Plant) {
-        let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
-        mySerialQueue.async {
+        DispatchQueue.global(qos: .background).async {
             do {
                 try self.context.save()
                 UserNotificationService.updateNotification(plant: plant)

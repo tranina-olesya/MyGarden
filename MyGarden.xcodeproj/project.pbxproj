@@ -28,6 +28,7 @@
 		599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447522FCB55D005C30A7 /* PlantCell.swift */; };
 		599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */; };
 		599C447A22FCC912005C30A7 /* DateConvertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C447922FCC912005C30A7 /* DateConvertService.swift */; };
+		59D8DC39230606D100361616 /* WaterTodayPlantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D8DC38230606D100361616 /* WaterTodayPlantsView.swift */; };
 		59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66CFF2301C0E300791DDD /* UINavigationController.swift */; };
 		59E66D082301C48600791DDD /* PlantImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D072301C48600791DDD /* PlantImageCell.swift */; };
 		59E66D0A2301C4AA00791DDD /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66D092301C4AA00791DDD /* TextFieldCell.swift */; };
@@ -60,6 +61,7 @@
 		599C447522FCB55D005C30A7 /* PlantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCell.swift; sourceTree = "<group>"; };
 		599C447722FCC4F6005C30A7 /* PlantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailViewController.swift; sourceTree = "<group>"; };
 		599C447922FCC912005C30A7 /* DateConvertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConvertService.swift; sourceTree = "<group>"; };
+		59D8DC38230606D100361616 /* WaterTodayPlantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTodayPlantsView.swift; sourceTree = "<group>"; };
 		59E66CFF2301C0E300791DDD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		59E66D072301C48600791DDD /* PlantImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantImageCell.swift; sourceTree = "<group>"; };
 		59E66D092301C4AA00791DDD /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				599C447522FCB55D005C30A7 /* PlantCell.swift */,
 				59EEE342230295F700F3DAC1 /* WaterNotificationCell.swift */,
+				59D8DC38230606D100361616 /* WaterTodayPlantsView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
+				59D8DC39230606D100361616 /* WaterTodayPlantsView.swift in Sources */,
 				59E66D082301C48600791DDD /* PlantImageCell.swift in Sources */,
 				599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */,
 				59E66D0A2301C4AA00791DDD /* TextFieldCell.swift in Sources */,
