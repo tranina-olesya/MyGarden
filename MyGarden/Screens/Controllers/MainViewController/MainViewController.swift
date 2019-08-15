@@ -14,41 +14,60 @@ enum MainViewSegue: String {
 }
 
 class MainViewController: UIViewController {
+    private struct Constatnts {
+        static let cellMarginSize: CGFloat = 10
+        static let cellRatio: CGFloat = 1.4
+    }
     
     private enum Sections: Int {
         case waterPlantsCell
         case plantsCell
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var waterTodayPlantsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var allPlantsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var containerViewHeightContraint: NSLayoutConstraint!
     
     var plants: [Plant] = []
     var waterNotificationPlants: [Plant] = []
     
     let dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
     
+    var allPlantsCellSize: CGSize = CGSize(width: 0, height: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        configureCollectionViews()
     }
 
-    func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
+    func configureCollectionViews() {
+        waterTodayPlantsCollectionView.delegate = self
+        waterTodayPlantsCollectionView.dataSource = self
+        allPlantsCollectionView.delegate = self
+        allPlantsCollectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-        updateTableView()
+        updateCellSize(screenWidth: view.frame.width)
+        updateCollectionViews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.reloadData()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        updateCellSize(screenWidth: size.width)
+        allPlantsCollectionView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,12 +84,24 @@ class MainViewController: UIViewController {
         }
     }
     
-    func updateTableView() {
+    func updateCellSize(screenWidth: CGFloat) {
+        let cellWidth = screenWidth / 2 - CGFloat(Constatnts.cellMarginSize * 2)
+        let cellHeight = cellWidth * Constatnts.cellRatio + Constatnts.cellMarginSize
+        
+        allPlantsCellSize = CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+//    func updateCollectionViewHeight() -> CGFloat {
+//        ceil(CGFloat(plants.count) / 2.0) * allPlantsCellSize.height
+//    }
+    
+    func updateCollectionViews() {
         self.dataProvider.getAllPlants { (plants) in
             DispatchQueue.main.async {
                 self.plants = plants
                 self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
-                self.tableView.reloadData()
+                self.allPlantsCollectionView.reloadData()
+                self.waterTodayPlantsCollectionView.reloadData()
             }
         }
     }
@@ -91,58 +122,41 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource, PlantsCellDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == allPlantsCollectionView {
+            return plants.count
+        } else {
+            return waterNotificationPlants.count
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let sectionType = Sections(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        }
-        
-        switch sectionType {
-        case .waterPlantsCell:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WaterPlantsCell", for: indexPath) as? WaterPlantsCell else {
-                return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == allPlantsCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantCell", for: indexPath) as? PlantCell else {
+                return UICollectionViewCell()
             }
-            cell.configureCell(plants: waterNotificationPlants)
+            cell.plant = plants[indexPath.row]
             return cell
-        case .plantsCell:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantsCell", for: indexPath) as? PlantsCell else {
-                return UITableViewCell()
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WaterNotificationCell", for: indexPath) as? WaterNotificationCell else {
+                return UICollectionViewCell()
             }
-            cell.delegate = self
-            cell.configureCell(plants: plants)
+            cell.plant = waterNotificationPlants[indexPath.row]
             return cell
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let sectionType = Sections(rawValue: indexPath.section) else {
-            return 0.0
-        }
-        
-        switch sectionType {
-        case .waterPlantsCell:
-            return 243
-        case .plantsCell:
-            return getCollectionViewHeight() + 20 * 2 + 50
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == allPlantsCollectionView {
+            return allPlantsCellSize
+        } else {
+            return CGSize(width: 100, height: 100)
         }
     }
-    
-    func getCollectionViewHeight() -> CGFloat {
-        let screenWidth = view.frame.width
-        let cellWidth = screenWidth / 2 - CGFloat(PlantsCell.cellMarginSize * 2)
-        let cellHeight = cellWidth * PlantsCell.cellRatio + PlantsCell.cellMarginSize
-        return ceil(CGFloat(plants.count) / 2.0) * cellHeight
-    }
-    
-    func didSelectedItem(indexPath: IndexPath) {
-        performSegue(withIdentifier: MainViewSegue.plantDetail.rawValue, sender: plants[indexPath.row])
-    }
+
 }

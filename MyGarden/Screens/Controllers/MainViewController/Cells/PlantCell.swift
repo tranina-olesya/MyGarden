@@ -16,12 +16,22 @@ class PlantCell: UICollectionViewCell {
     
     var plant: Plant? {
         didSet {
-            guard let name = plant?.name else {
-                return
-            }
-            nameLabel.text = name
-            ImageSaveService.getSavedImage(name: name) { (image) in
-                DispatchQueue.main.async {
+            nameLabel.text = plant?.name
+            loadImage()
+        }
+    }
+    
+    func loadImage() {
+        guard let name = plant?.name else {
+            return
+        }
+        ImageStorageService.getSavedImage(name: name) { (image) in
+            let resizedImage = image?.resize(width: 200)
+            
+            DispatchQueue.main.async {
+                if resizedImage != nil {
+                    self.imageView.image = resizedImage
+                } else {
                     self.imageView.image = image
                 }
             }

@@ -24,12 +24,7 @@ class WaterNotificationCell: UICollectionViewCell {
             }
             nameLabel.text = name
             daysLabel.text = days < 2 ? "Today" : "\(days) days"
-            ImageSaveService.getSavedImage(name: name) { (image) in
-                DispatchQueue.main.async {
-                    self.plantImageView.image = image
-                }
-            }
-    
+            loadImage()
         }
     }
     
@@ -42,5 +37,22 @@ class WaterNotificationCell: UICollectionViewCell {
         let date2 = calendar.startOfDay(for: Date())
         let components = calendar.dateComponents([.day], from: date1, to: date2)
         return components.day
+    }
+    
+    func loadImage() {
+        guard let name = plant?.name else {
+            return
+        }
+        ImageStorageService.getSavedImage(name: name) { (image) in
+            let resizedImage = image?.resize(width: 200)
+            
+            DispatchQueue.main.async {
+                if resizedImage != nil {
+                    self.plantImageView.image = resizedImage
+                } else {
+                    self.plantImageView.image = image
+                }
+            }
+        }
     }
 }

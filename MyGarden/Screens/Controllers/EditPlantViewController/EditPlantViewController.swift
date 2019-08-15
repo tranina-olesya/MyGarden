@@ -93,7 +93,7 @@ class EditPlantViewController: UIViewController {
             let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
             let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
             let plantEntry = plantEntries.first(where: { $0.name == cell.plantTextField.text }){
-            if let pathUrl = ImageSaveService.saveImage(name: name, image: image) {
+            if let pathUrl = ImageStorageService.saveImage(name: name, image: image) {
                 if let plant = plant {
                     plant.name = name
                     plant.descriptionText = description

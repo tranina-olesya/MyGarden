@@ -82,7 +82,7 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 return UITableViewCell()
             }
             if let name = plant?.name {
-                ImageSaveService.getSavedImage(name: name) { (image) in
+                ImageStorageService.getSavedImage(name: name) { (image) in
                     DispatchQueue.main.async {
                         if let image = image {
                             cell.configureCell(image: image)

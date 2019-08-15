@@ -11,12 +11,10 @@
 		590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66F2304687D0089E7BE /* NetworkConstants.swift */; };
 		590AE673230482070089E7BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE672230482070089E7BE /* CoreDataStack.swift */; };
 		590AE6752304826B0089E7BE /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE6742304826B0089E7BE /* DataProvider.swift */; };
-		591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */; };
-		591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591E18F822FF5E1B003BA271 /* PlantsCell.swift */; };
 		59508850230337D1007658A9 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950884F230337D1007658A9 /* ApiService.swift */; };
 		595088522303386A007658A9 /* WikiEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595088512303386A007658A9 /* WikiEntries.swift */; };
 		59508854230347FA007658A9 /* PlantEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59508853230347FA007658A9 /* PlantEntry.swift */; };
-		595088562303502D007658A9 /* ImageSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595088552303502C007658A9 /* ImageSaveService.swift */; };
+		595088562303502D007658A9 /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595088552303502C007658A9 /* ImageStorageService.swift */; };
 		5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1F922F9F02100F100F9 /* AppDelegate.swift */; };
 		5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951C1FB22F9F02100F100F9 /* MainViewController.swift */; };
 		5951C1FF22F9F02100F100F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5951C1FD22F9F02100F100F9 /* Main.storyboard */; };
@@ -43,12 +41,10 @@
 		590AE66F2304687D0089E7BE /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		590AE672230482070089E7BE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		590AE6742304826B0089E7BE /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
-		591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPlantsCell.swift; sourceTree = "<group>"; };
-		591E18F822FF5E1B003BA271 /* PlantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCell.swift; sourceTree = "<group>"; };
 		5950884F230337D1007658A9 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		595088512303386A007658A9 /* WikiEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiEntries.swift; sourceTree = "<group>"; };
 		59508853230347FA007658A9 /* PlantEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantEntry.swift; sourceTree = "<group>"; };
-		595088552303502C007658A9 /* ImageSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveService.swift; sourceTree = "<group>"; };
+		595088552303502C007658A9 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
 		5951C1F622F9F02100F100F9 /* MyGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5951C1F922F9F02100F100F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5951C1FB22F9F02100F100F9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -159,7 +155,7 @@
 				599C447922FCC912005C30A7 /* DateConvertService.swift */,
 				59806BF223008AA00051277B /* UserNotificationService.swift */,
 				5950884F230337D1007658A9 /* ApiService.swift */,
-				595088552303502C007658A9 /* ImageSaveService.swift */,
+				595088552303502C007658A9 /* ImageStorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -196,8 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				599C447522FCB55D005C30A7 /* PlantCell.swift */,
-				591E18F622FF5DEB003BA271 /* WaterPlantsCell.swift */,
-				591E18F822FF5E1B003BA271 /* PlantsCell.swift */,
 				59EEE342230295F700F3DAC1 /* WaterNotificationCell.swift */,
 			);
 			path = Cells;
@@ -322,12 +316,11 @@
 				5951C1FC22F9F02100F100F9 /* MainViewController.swift in Sources */,
 				59E66D082301C48600791DDD /* PlantImageCell.swift in Sources */,
 				599C447622FCB55D005C30A7 /* PlantCell.swift in Sources */,
-				591E18F722FF5DEB003BA271 /* WaterPlantsCell.swift in Sources */,
 				59E66D0A2301C4AA00791DDD /* TextFieldCell.swift in Sources */,
 				59E66D142301E57F00791DDD /* PlantDetailImageCell.swift in Sources */,
 				595088522303386A007658A9 /* WikiEntries.swift in Sources */,
 				5951C22D22FA031400F100F9 /* Plant.swift in Sources */,
-				595088562303502D007658A9 /* ImageSaveService.swift in Sources */,
+				595088562303502D007658A9 /* ImageStorageService.swift in Sources */,
 				590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */,
 				59806BF323008AA00051277B /* UserNotificationService.swift in Sources */,
 				59508854230347FA007658A9 /* PlantEntry.swift in Sources */,
@@ -335,7 +328,6 @@
 				59EEE343230295F700F3DAC1 /* WaterNotificationCell.swift in Sources */,
 				590AE6752304826B0089E7BE /* DataProvider.swift in Sources */,
 				59E66D002301C0E300791DDD /* UINavigationController.swift in Sources */,
-				591E18F922FF5E1B003BA271 /* PlantsCell.swift in Sources */,
 				5951C23222FAB5B400F100F9 /* EditPlantViewController.swift in Sources */,
 				590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */,
 				590AE673230482070089E7BE /* CoreDataStack.swift in Sources */,
