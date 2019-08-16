@@ -78,44 +78,63 @@ class EditPlantViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? EditPlantImageCell,
             let image = imageCell.plantImageView.image?.fixOrientation() else {
-            let alert = UIAlertController(title: "No image", message: "Please add an image of your plant", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
-                return
+            showAlert(title: "No image", message: "Please add an image of your plant")
+            return
         }
         
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell,
             let name = cell.nameTextField.text,
             !name.isEmpty else {
-            let alert = UIAlertController(title: "No name", message: "Please add a name for your plant", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
+            showAlert(title: "No name", message: "Please add a name for your plant")
             return
         }
         
-        if let description = cell.descriptionTextField.text,
-            let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
-            let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
-            let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
-            let plantEntry = plantEntries.first(where: { $0.name == cell.plantTextField.text }){
-            if let pathUrl = ImageStorageService.saveImage(name: name, image: image) {
-                if let plant = plant {
-                    plant.name = name
-                    plant.descriptionText = description
-                    plant.dayPotted = dayPotted
-                    plant.wateringTime = wateringTime
-                    plant.waterSchedule = Int16(waterSchedule)
-                    plant.lastWatered = Date()
-                    plant.photoUrl = pathUrl
-                    plant.plantKind = plantEntry.name
-                    plant.wikiDescription = plantEntry.description
-                    dataProvider.savePlant(plant: plant)
-                } else {
-                    dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
+        dataProvider.checkIfUniqueName(name: name, onComplete: {
+            (isUnique) in
+            
+            if !isUnique {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Not a unique name", message: "Plant with name \"\(name)\" alresy exists")
                 }
-                navigationController?.popToRootViewController(animated: true)
+                return
             }
-        }
+            
+            if let description = cell.descriptionTextField.text,
+                let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
+                let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
+                let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
+                let plantEntry = self.plantEntries.first(where: { $0.name == cell.plantTextField.text }){
+                if let pathUrl = ImageStorageService.saveImage(name: name, image: image) {
+                    if let plant = self.plant {
+                        plant.name = name
+                        plant.descriptionText = description
+                        plant.dayPotted = dayPotted
+                        plant.wateringTime = wateringTime
+                        plant.waterSchedule = Int16(waterSchedule)
+                        plant.lastWatered = Date()
+                        plant.photoUrl = pathUrl
+                        plant.plantKind = plantEntry.name
+                        plant.wikiDescription = plantEntry.description
+                        self.dataProvider.savePlant(plant: plant)
+                    } else {
+                        self.dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
+                    }
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            // error
+        }, onError: {
+            (error) in
+            // error
+        })
+        
+       
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func viewTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -132,13 +151,11 @@ class EditPlantViewController: UIViewController {
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-//        view.frame.origin.y = -keyboardRect.height
         tableViewBottomConstraint.constant = keyboardRect.height
         navigationController?.navigationBar.isHidden = true
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-//        view.frame.origin.y = 0
         tableViewBottomConstraint.constant = 0
         navigationController?.navigationBar.isHidden = false
     }
@@ -211,10 +228,10 @@ extension EditPlantViewController: EditPlantImageCellDelegate {
 
 extension EditPlantViewController: EditPlantDeleteCellDelegate {
     func didPressDeleteButton() {
-        guard let name = plant?.name else {
+        guard let plant = plant else {
             return
         }
-        dataProvider.deletePlant(name: name) { (complete) in
+        dataProvider.deletePlant(plant: plant) { (complete) in
             DispatchQueue.main.async {
                 self.navigationController?.popToRootViewController(animated: true)
             }

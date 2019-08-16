@@ -64,19 +64,41 @@ class DataProvider {
     }
 
     func deletePlant(
-        name: String, 
+        plant: Plant,
         onComplete: @escaping (Bool) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-            
-            guard let plant = try? self.context.fetch(fetchRequest).first else {
+            do {
+//                let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+//                fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+//
+//                guard let plant = try? self.context.fetch(fetchRequest).first else {
+//                    onComplete(false)
+//                    return
+//                }
+                
+                self.context.delete(plant)
+                try self.context.save()
+                onComplete(true)
+            } catch {
+                print(error)
                 onComplete(false)
-                return
             }
-            
-            self.context.delete(plant)
-            onComplete(true)
         }
     }
+    
+    func checkIfUniqueName(
+        name: String,
+        onComplete: @escaping (Bool) -> Void,
+        onError: @escaping (Error) -> Void) {
+        do {
+            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+            let isUnique = try self.context.fetch(fetchRequest).first == nil
+            onComplete(isUnique)
+        } catch {
+            print(error)
+            onError(error)
+        }
+    }
+    
 }
