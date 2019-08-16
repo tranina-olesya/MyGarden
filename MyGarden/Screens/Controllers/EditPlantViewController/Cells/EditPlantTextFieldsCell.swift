@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextFieldCell: UITableViewCell {
+class EditPlantTextFieldsCell: UITableViewCell {
 
     @IBOutlet weak var nameTextField: UITextField!
     
@@ -59,7 +59,11 @@ class TextFieldCell: UITableViewCell {
         }
     }
 
-    var plantEntries: [PlantEntry] = []
+    var plantEntries: [PlantEntry] = [] {
+        didSet {
+            plantTextField.isEnabled = plantEntries.count > 0
+        }
+    }
     
     var waterSchedulePickerDelegateDataSourse = WaterSchedulePickerDelegateDataSourse()
     
@@ -124,9 +128,9 @@ class TextFieldCell: UITableViewCell {
     
 }
 
-extension TextFieldCell: WaterSchedulePickerDelegate, WateringTimePickerDelegate {
+extension EditPlantTextFieldsCell: WaterSchedulePickerDelegate, WateringTimePickerDelegate {
     func didSelectedWateringTime(row: Int) {
-        wateringTimeTextField.text = TextFieldCell.wateringTimeValues[row]
+        wateringTimeTextField.text = EditPlantTextFieldsCell.wateringTimeValues[row]
     }
     
     func didSelectedWaterSchedule(row: Int) {
@@ -151,11 +155,11 @@ class WaterSchedulePickerDelegateDataSourse: NSObject,  UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return TextFieldCell.waterScheduleValues[row]
+        return EditPlantTextFieldsCell.waterScheduleValues[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return TextFieldCell.waterScheduleValues.count
+        return EditPlantTextFieldsCell.waterScheduleValues.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -170,7 +174,7 @@ class WateringTimePickerDelegateDataSourse: NSObject,  UIPickerViewDelegate, UIP
     weak var delegate: WateringTimePickerDelegate?
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return TextFieldCell.wateringTimeValues.count
+        return EditPlantTextFieldsCell.wateringTimeValues.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -178,7 +182,7 @@ class WateringTimePickerDelegateDataSourse: NSObject,  UIPickerViewDelegate, UIP
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return TextFieldCell.wateringTimeValues[row]
+        return EditPlantTextFieldsCell.wateringTimeValues[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -186,7 +190,7 @@ class WateringTimePickerDelegateDataSourse: NSObject,  UIPickerViewDelegate, UIP
     }
 }
 
-extension TextFieldCell: UIPickerViewDelegate, UIPickerViewDataSource {
+extension EditPlantTextFieldsCell: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

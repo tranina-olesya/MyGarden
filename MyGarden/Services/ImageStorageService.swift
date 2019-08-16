@@ -26,7 +26,7 @@ class ImageStorageService {
     }
     
     static func getSavedImage(name: String, onComplete: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
                 onComplete(nil)
                 return

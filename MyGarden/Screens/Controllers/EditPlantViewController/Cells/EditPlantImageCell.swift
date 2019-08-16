@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PlantImageCell: UITableViewCell {
+class EditPlantImageCell: UITableViewCell {
 
     @IBOutlet weak var plantImageView: UIImageView!
     
-    weak var delegate: PlantImageCellDelegate?
+    weak var delegate: EditPlantImageCellDelegate?
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
@@ -45,16 +45,17 @@ class PlantImageCell: UITableViewCell {
     }
     
     func configureCell(image: UIImage?) {
-        plantImageView.image = image
+        plantImageView.image = image    
     }
     
     func handleScroll(offset: CGFloat) {
         clipsToBounds = offset >= 0
         heightConstraint.constant = 300 - offset
     }
+
 }
 
-extension PlantImageCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditPlantImageCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
@@ -64,7 +65,7 @@ extension PlantImageCell: UIImagePickerControllerDelegate, UINavigationControlle
     }
 }
 
-protocol PlantImageCellDelegate: class {
+protocol EditPlantImageCellDelegate: class {
     func presentView(_ view: UIViewController, animated: Bool)
     
     func dismiss(animated: Bool)

@@ -32,7 +32,6 @@ class DataProvider {
     }
     
     func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int, photoUrl: String, plantEntry: PlantEntry?) {
-        let mySerialQueue = DispatchQueue(label: "ru.vsu.MyGarden", qos: .background)
         DispatchQueue.global(qos: .background).async {
             do {
                 let plant = Plant(context: self.context)
@@ -61,6 +60,23 @@ class DataProvider {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+
+    func deletePlant(
+        name: String, 
+        onComplete: @escaping (Bool) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name = %@", name)
+            
+            guard let plant = try? self.context.fetch(fetchRequest).first else {
+                onComplete(false)
+                return
+            }
+            
+            self.context.delete(plant)
+            onComplete(true)
         }
     }
 }

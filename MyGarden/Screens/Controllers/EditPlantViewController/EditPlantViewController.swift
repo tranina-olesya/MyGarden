@@ -13,15 +13,20 @@ class EditPlantViewController: UIViewController {
     private enum Sections: Int, CaseIterable {
         case image
         case fields
+        case delete
     }
    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     let dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
     
     var plantEntries: [PlantEntry] = []
     
     var plant: Plant?
+    
+    var plantImage: UIImage?
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -40,7 +45,7 @@ class EditPlantViewController: UIViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantImageCell {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EditPlantImageCell {
             cell.handleScroll(offset: offset)
         }
     }
@@ -49,7 +54,7 @@ class EditPlantViewController: UIViewController {
         ApiService.getWikiInfo(onCompleted: { (plantEntries) in
             self.plantEntries = plantEntries
             DispatchQueue.main.async {
-                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell {
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell {
                     cell.plantEntries = plantEntries
                     cell.plantTextField.isEnabled = true
                     cell.plantTextField.text = plantEntries[0].name
@@ -71,7 +76,7 @@ class EditPlantViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? PlantImageCell,
+        guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? EditPlantImageCell,
             let image = imageCell.plantImageView.image?.fixOrientation() else {
             let alert = UIAlertController(title: "No image", message: "Please add an image of your plant", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -79,7 +84,7 @@ class EditPlantViewController: UIViewController {
                 return
         }
         
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? TextFieldCell,
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell,
             let name = cell.nameTextField.text,
             !name.isEmpty else {
             let alert = UIAlertController(title: "No name", message: "Please add a name for your plant", preferredStyle: .alert)
@@ -127,19 +132,22 @@ class EditPlantViewController: UIViewController {
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        view.frame.origin.y = -keyboardRect.height
+//        view.frame.origin.y = -keyboardRect.height
+        tableViewBottomConstraint.constant = keyboardRect.height
         navigationController?.navigationBar.isHidden = true
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-        view.frame.origin.y = 0
+//        view.frame.origin.y = 0
+        tableViewBottomConstraint.constant = 0
         navigationController?.navigationBar.isHidden = false
     }
 }
 
 extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Sections.allCases.count
+        let cellCount = Sections.allCases.count
+        return plant != nil ? cellCount : cellCount - 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -153,17 +161,23 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch sectionType {
         case .image:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlantImageCell", for: indexPath) as? PlantImageCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EditPlantImageCell", for: indexPath) as? EditPlantImageCell else {
                 return UITableViewCell()
             }
             cell.delegate = self
+            cell.configureCell(image: plantImage)
             return cell
         case .fields:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EditPlantTextFieldsCell", for: indexPath) as? EditPlantTextFieldsCell else {
                 return UITableViewCell()
             }
             cell.configureCell(plantEntries: plantEntries, plant: plant)
-            cell.plantTextField.isEnabled = plantEntries.count > 0
+//            cell.plantTextField.isEnabled = plantEntries.count > 0
+            return cell
+        case .delete:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EditPlantDeleteCell", for: indexPath) as? EditPlantDeleteCell else {
+                return UITableViewCell()
+            }
             return cell
         }
     }
@@ -178,11 +192,13 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             return 300.0
         case .fields:
             return 520.0
+        case .delete:
+            return 90.0
         }
     }
 }
 
-extension EditPlantViewController: PlantImageCellDelegate {
+extension EditPlantViewController: EditPlantImageCellDelegate {
     func presentView(_ view: UIViewController, animated: Bool) {
         present(view, animated: animated)
     }

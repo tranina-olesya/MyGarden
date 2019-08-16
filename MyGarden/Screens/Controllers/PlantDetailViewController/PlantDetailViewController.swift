@@ -54,10 +54,12 @@ class PlantDetailViewController: UIViewController {
         
         switch plantDetailSegue {
         case .editPlant:
-            guard let vc = segue.destination as? EditPlantViewController else {
+            guard let vc = segue.destination as? EditPlantViewController,
+                let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? PlantDetailImageCell else {
                 return
             }
             vc.plant = plant
+            vc.plantImage = imageCell.plantImageView.image
         }
     }
 }

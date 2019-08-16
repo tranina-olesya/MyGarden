@@ -26,7 +26,7 @@ class PlantCell: UICollectionViewCell {
             return
         }
         ImageStorageService.getSavedImage(name: name) { (image) in
-            let resizedImage = image?.resize(width: 200)
+            let resizedImage = image?.resize(width: 400)
             
             DispatchQueue.main.async {
                 if resizedImage != nil {
