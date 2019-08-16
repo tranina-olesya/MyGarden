@@ -178,6 +178,7 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EditPlantDeleteCell", for: indexPath) as? EditPlantDeleteCell else {
                 return UITableViewCell()
             }
+            cell.delegate = self
             return cell
         }
     }
@@ -205,5 +206,18 @@ extension EditPlantViewController: EditPlantImageCellDelegate {
     
     func dismiss(animated: Bool) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditPlantViewController: EditPlantDeleteCellDelegate {
+    func didPressDeleteButton() {
+        guard let name = plant?.name else {
+            return
+        }
+        dataProvider.deletePlant(name: name) { (complete) in
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
     }
 }

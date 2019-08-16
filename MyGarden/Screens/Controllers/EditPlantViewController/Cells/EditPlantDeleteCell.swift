@@ -10,8 +10,13 @@ import UIKit
 
 class EditPlantDeleteCell: UITableViewCell {
     
-    @IBAction func deleteButtonPressed(_ sender: UIButton)  {
-        print("press")
-        print("press")
+    weak var delegate: EditPlantDeleteCellDelegate?
+    
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        delegate?.didPressDeleteButton()
     }
+}
+
+protocol EditPlantDeleteCellDelegate: class {
+    func didPressDeleteButton()
 }
