@@ -9,21 +9,6 @@
 import Foundation
 import UserNotifications
 
-//let notificationsTime: [WateringTime: DateComponents] = {
-//    var values : [WateringTime: DateComponents] = [:]
-//    
-//    var dateConponents = DateComponents()
-//    dateConponents.minute = 0
-//    dateConponents.second = 0
-//    
-//    dateConponents.hour = 8
-//    values[.morning] = dateConponents
-//    
-//    dateConponents.hour = 20
-//    values[.evening] = dateConponents
-//    
-//    return values
-//}()
 let notificationsTime: [WateringTime: Int] = [.morning: 8, .evening: 20]
 
 class UserNotificationService {
@@ -31,30 +16,28 @@ class UserNotificationService {
     static func updateNotification(plant: Plant) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (success, error) in
             if success {
-                guard let identifier = plant.name else {
-                    return
+                DispatchQueue.global(qos: .background).async {
+                    guard let identifier = plant.name else {
+                        return
+                    }
+                    self.removeNotification(with: [identifier])
+                    self.createNotification(identifier: identifier, plant: plant)
                 }
-                removeNotification(with: [identifier])
-                self.createNotification(identifier: identifier, plant: plant)
             }
         }
     }
     
     private static func createNotification(identifier: String, plant: Plant) {
-        guard let lastWatered = plant.lastWatered else {
+        guard let nextWateringTime = plant.nextWateringTime else {
             return
         }
-        
         let content = UNMutableNotificationContent()
         content.title = "Time to water your plants!"
         content.body = "Don't forget to water \(identifier) today"
         
-        let dateNextWatering = Date(timeInterval: TimeInterval(24 * 60 * 60 * Int(plant.waterSchedule)), since: lastWatered)
-        let calendar = Calendar(identifier: .gregorian)
-        var dateComponents = calendar.dateComponents([.day, .month, .year], from: dateNextWatering)
-        dateComponents.second = 0
-        dateComponents.minute = 0
-        dateComponents.hour = notificationsTime[plant.wateringTime]
+        let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: nextWateringTime)
+        print(nextWateringTime)
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
@@ -67,6 +50,21 @@ class UserNotificationService {
     
     private static func removeNotification(with identifiers: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    
+    static func getNextWateringTime(plant: Plant) -> Date {
+        var lastWaterdDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: plant.lastWatered ?? Date())
+        lastWaterdDateComponents.second = 0
+        lastWaterdDateComponents.minute = 0
+        lastWaterdDateComponents.hour = notificationsTime[plant.wateringTime]
+        let lastWatered = Calendar.current.date(from: lastWaterdDateComponents)!
+        
+        
+        let dateNextWatering = Date(timeInterval: TimeInterval(24 * 60 * 60 * Int(plant.waterSchedule)), since: lastWatered)
+        let dateComponents = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: dateNextWatering)
+        let nextWateringTime = Calendar.current.date(from: dateComponents)!
+        return nextWateringTime
     }
     
 }

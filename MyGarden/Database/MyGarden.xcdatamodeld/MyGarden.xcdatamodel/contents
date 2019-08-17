@@ -5,6 +5,7 @@
         <attribute name="descriptionText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastWatered" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="nextWateringTime" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="photoUrl" attributeType="String" syncable="YES"/>
         <attribute name="plantKind" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wateringTimeRaw" attributeType="String" defaultValueString="Morning" syncable="YES"/>
@@ -12,6 +13,6 @@
         <attribute name="wikiDescription" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Plant" positionX="-36" positionY="9" width="128" height="180"/>
+        <element name="Plant" positionX="-36" positionY="9" width="128" height="195"/>
     </elements>
 </model>

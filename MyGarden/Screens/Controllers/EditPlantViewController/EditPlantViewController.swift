@@ -104,7 +104,7 @@ class EditPlantViewController: UIViewController {
                 let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
                 let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
                 let plantEntry = self.plantEntries.first(where: { $0.name == cell.plantTextField.text }){
-                if let pathUrl = ImageStorageService.saveImage(name: name, image: image) {
+                if let pathUrl = ImageStorageService.saveImage(name: name, image: image.resize(width: 1000.0) ?? image) {
                     if let plant = self.plant {
                         plant.name = name
                         plant.descriptionText = description
@@ -217,6 +217,10 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension EditPlantViewController: EditPlantImageCellDelegate {
+    func imageAdded(image: UIImage) {
+        plantImage = image
+    }
+    
     func presentView(_ view: UIViewController, animated: Bool) {
         present(view, animated: animated)
     }

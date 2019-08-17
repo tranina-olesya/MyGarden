@@ -86,21 +86,17 @@ class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 self.plants = plants
                 self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
-                print(self.waterNotificationPlants.count)
                 self.allPlantsCollectionView.reloadData()
             }
         }
     }
 
     func formWaterNotificationPlatsArray(plants: [Plant]) -> [Plant] {
-        let nowDate = Date()
+        let nowDate = Calendar.current.date(byAdding: .second, value: TimeZone.current.secondsFromGMT(), to: Date())!
         var waterNotificationPlants = [Plant]()
         for plant in plants {
-            guard let lastWatered = plant.lastWatered else {
-                continue
-            }
-            let shouldWateredDate = Date(timeInterval: TimeInterval(Int(plant.waterSchedule) * 24 * 60 * 60), since: lastWatered)
-            if shouldWateredDate < nowDate {
+            if let nextWateringTime = plant.nextWateringTime,
+                nextWateringTime < nowDate {
                 waterNotificationPlants.append(plant)
             }
         }
@@ -122,7 +118,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantCell", for: indexPath) as? PlantCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainViewPlantCell", for: indexPath) as? MainViewPlantCell else {
             return UICollectionViewCell()
         }
         cell.plant = plants[indexPath.row]
@@ -134,10 +130,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "WaterTodayPlantsView", for: indexPath) as? WaterTodayPlantsView else {
+        guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MainViewWaterTodayPlantsView", for: indexPath) as? MainViewWaterTodayPlantsView else {
             return UICollectionReusableView()
         }
-        print(self.waterNotificationPlants.count)
         view.configureView(plants: waterNotificationPlants)
         return view
     }

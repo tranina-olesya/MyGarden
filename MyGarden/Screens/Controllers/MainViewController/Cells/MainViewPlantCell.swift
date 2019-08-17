@@ -1,5 +1,5 @@
 //
-//  PlantCell.swift
+//  MainViewPlantCell.swift
 //  MyGarden
 //
 //  Created by Olesya Tranina on 08/08/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlantCell: UICollectionViewCell {
+class MainViewPlantCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     

@@ -61,6 +61,7 @@ extension EditPlantImageCell: UIImagePickerControllerDelegate, UINavigationContr
             return
         }
         plantImageView.image = image
+        delegate?.imageAdded(image: image)
         delegate?.dismiss(animated: true)
     }
 }
@@ -69,4 +70,6 @@ protocol EditPlantImageCellDelegate: class {
     func presentView(_ view: UIViewController, animated: Bool)
     
     func dismiss(animated: Bool)
+    
+    func imageAdded(image: UIImage)
 }

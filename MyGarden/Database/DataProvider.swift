@@ -44,6 +44,7 @@ class DataProvider {
                 plant.photoUrl = photoUrl
                 plant.plantKind = plantEntry?.name
                 plant.wikiDescription = plantEntry?.description
+                plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
                 try self.context.save()
                 UserNotificationService.updateNotification(plant: plant)
             } catch {
@@ -68,14 +69,6 @@ class DataProvider {
         onComplete: @escaping (Bool) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
-//                let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
-//                fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-//
-//                guard let plant = try? self.context.fetch(fetchRequest).first else {
-//                    onComplete(false)
-//                    return
-//                }
-                
                 self.context.delete(plant)
                 try self.context.save()
                 onComplete(true)
@@ -100,5 +93,4 @@ class DataProvider {
             onError(error)
         }
     }
-    
 }
