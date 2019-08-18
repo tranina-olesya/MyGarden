@@ -9,8 +9,12 @@
 import UIKit
 
 class MainViewWaterTodayPlantsView: UICollectionReusableView {
-        
+    
+    @IBOutlet weak var noPlantsLabel: UILabel!
+    
     @IBOutlet weak var waterTodayPlantsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var noPlantsLabelHeightConstraint: NSLayoutConstraint!
     
     var waterTodayPlants = [Plant]()
     
@@ -23,7 +27,16 @@ class MainViewWaterTodayPlantsView: UICollectionReusableView {
     
     func configureView(plants: [Plant]) {
         self.waterTodayPlants = plants
-        waterTodayPlantsCollectionView.reloadData()
+        if plants.isEmpty {
+            waterTodayPlantsCollectionView.isHidden = true
+            noPlantsLabel.isHidden = false
+            noPlantsLabelHeightConstraint.constant = 22
+        } else {
+            waterTodayPlantsCollectionView.isHidden = false
+            noPlantsLabel.isHidden = true
+            noPlantsLabelHeightConstraint.constant = waterTodayPlantsCollectionView.frame.height
+            waterTodayPlantsCollectionView.reloadData()
+        }
     }
   
     

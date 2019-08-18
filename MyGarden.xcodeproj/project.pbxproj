@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590828D42309560C00493F1F /* MainViewEmptyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590828D32309560C00493F1F /* MainViewEmptyMessageCell.swift */; };
 		590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66D2303F1BC0089E7BE /* UIImage.swift */; };
 		590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66F2304687D0089E7BE /* NetworkConstants.swift */; };
 		590AE673230482070089E7BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE672230482070089E7BE /* CoreDataStack.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590828D32309560C00493F1F /* MainViewEmptyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewEmptyMessageCell.swift; sourceTree = "<group>"; };
 		590AE66D2303F1BC0089E7BE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		590AE66F2304687D0089E7BE /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		590AE672230482070089E7BE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				599C447522FCB55D005C30A7 /* MainViewPlantCell.swift */,
 				59EEE342230295F700F3DAC1 /* MainViewWaterTodayPlantCell.swift */,
 				59D8DC38230606D100361616 /* MainViewWaterTodayPlantsView.swift */,
+				590828D32309560C00493F1F /* MainViewEmptyMessageCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				59D8DC3B230684A300361616 /* EditPlantDeleteCell.swift in Sources */,
 				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,
 				5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */,
+				590828D42309560C00493F1F /* MainViewEmptyMessageCell.swift in Sources */,
 				5951C1FA22F9F02100F100F9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

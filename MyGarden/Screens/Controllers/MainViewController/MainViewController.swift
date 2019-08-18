@@ -20,8 +20,8 @@ class MainViewController: UIViewController {
     }
     
     private enum Sections: Int {
-        case waterPlantsCell
-        case plantsCell
+        case plants
+        case emptyMessage
     }
     
     @IBOutlet weak var allPlantsCollectionView: UICollectionView!
@@ -110,14 +110,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == allPlantsCollectionView {
-            return plants.count
-        } else {
-            return waterNotificationPlants.count
-        }
+        return max(plants.count, 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard !plants.isEmpty else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainViewEmptyMessageCell", for: indexPath) as? MainViewEmptyMessageCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainViewPlantCell", for: indexPath) as? MainViewPlantCell else {
             return UICollectionViewCell()
         }
@@ -126,7 +128,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return allPlantsCellSize
+        guard !plants.isEmpty else {
+            return CGSize(width: view.frame.width, height: 300)
+        }
+        return allPlantsCellSize
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -136,5 +141,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         view.configureView(plants: waterNotificationPlants)
         return view
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if waterNotificationPlants.isEmpty {
+            return CGSize(width: view.frame.width, height: 178)
+        } else {
+            return CGSize(width: view.frame.width, height: 326)
+        }
+    }
 }

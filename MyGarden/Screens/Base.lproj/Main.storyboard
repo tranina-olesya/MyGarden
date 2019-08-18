@@ -80,6 +80,37 @@
                                             <segue destination="Vtu-c1-p8n" kind="show" identifier="showPlantDetail" id="7Wo-fJ-GZF"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainViewEmptyMessageCell" id="BH2-BZ-gcc" customClass="MainViewEmptyMessageCell" customModule="MyGarden" customModuleProvider="target">
+                                        <rect key="frame" x="213" y="326" width="191" height="226"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="226"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newPlantImage" translatesAutoresizingMaskIntoConstraints="NO" id="hIl-ln-weK">
+                                                    <rect key="frame" x="45.666666666666657" y="63" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="bh8-mV-ule"/>
+                                                        <constraint firstAttribute="height" constant="100" id="gTG-ug-zgW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any plants yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m80-1h-sxa">
+                                                    <rect key="frame" x="30" y="193" width="131" height="48"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="m80-1h-sxa" firstAttribute="top" secondItem="hIl-ln-weK" secondAttribute="bottom" constant="30" id="6bZ-vm-75i"/>
+                                            <constraint firstAttribute="trailing" secondItem="m80-1h-sxa" secondAttribute="trailing" constant="30" id="9cj-vd-hh7"/>
+                                            <constraint firstItem="hIl-ln-weK" firstAttribute="centerY" secondItem="BH2-BZ-gcc" secondAttribute="centerY" id="DqY-J6-ABa"/>
+                                            <constraint firstItem="m80-1h-sxa" firstAttribute="leading" secondItem="BH2-BZ-gcc" secondAttribute="leading" constant="30" id="TVL-de-DTr"/>
+                                            <constraint firstItem="hIl-ln-weK" firstAttribute="centerX" secondItem="BH2-BZ-gcc" secondAttribute="centerX" id="XCk-n0-ThW"/>
+                                        </constraints>
+                                    </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MainViewWaterTodayPlantsView" id="n6m-br-4ut" customClass="MainViewWaterTodayPlantsView" customModule="MyGarden" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="326"/>
@@ -88,7 +119,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zew-y0-WDV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="326"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Water Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkR-SS-ivT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Water Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkR-SS-ivT">
                                                     <rect key="frame" x="20" y="20" width="374" height="36"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                     <nil key="textColor"/>
@@ -223,28 +254,44 @@
                                                         <segue destination="d3k-29-jfU" kind="show" identifier="showNewPlant" id="NL8-Zw-oJh"/>
                                                     </connections>
                                                 </button>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have to water plants today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="dgT-8Z-Piy">
+                                                    <rect key="frame" x="20" y="66" width="374" height="170"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="170" id="LL2-St-jIG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                    <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="gkR-SS-ivT" secondAttribute="trailing" constant="20" id="5wH-MK-PMe"/>
+                                                <constraint firstItem="dgT-8Z-Piy" firstAttribute="leading" secondItem="zew-y0-WDV" secondAttribute="leading" constant="20" id="CH7-VV-Jzg"/>
                                                 <constraint firstItem="p3k-tX-5DZ" firstAttribute="leading" secondItem="zew-y0-WDV" secondAttribute="leading" id="Ing-EC-Tg0"/>
                                                 <constraint firstItem="ECn-iR-0Zs" firstAttribute="top" secondItem="p3k-tX-5DZ" secondAttribute="bottom" constant="20" id="L9l-pE-QsT"/>
+                                                <constraint firstItem="ECn-iR-0Zs" firstAttribute="top" secondItem="dgT-8Z-Piy" secondAttribute="bottom" constant="20" id="MGz-yC-8RG"/>
                                                 <constraint firstItem="gkR-SS-ivT" firstAttribute="top" secondItem="zew-y0-WDV" secondAttribute="top" constant="20" id="Mf4-0i-Ftp"/>
                                                 <constraint firstAttribute="trailing" secondItem="ECn-iR-0Zs" secondAttribute="trailing" constant="10" id="Yar-0l-LLd"/>
                                                 <constraint firstAttribute="trailing" secondItem="p3k-tX-5DZ" secondAttribute="trailing" id="aCq-C7-jYY"/>
                                                 <constraint firstAttribute="bottom" secondItem="ECn-iR-0Zs" secondAttribute="bottom" constant="20" id="c4J-ly-BzH"/>
-                                                <constraint firstItem="p3k-tX-5DZ" firstAttribute="top" secondItem="gkR-SS-ivT" secondAttribute="bottom" constant="10" id="eC6-J7-uiV"/>
+                                                <constraint firstItem="p3k-tX-5DZ" firstAttribute="top" secondItem="gkR-SS-ivT" secondAttribute="bottom" priority="999" constant="10" id="eC6-J7-uiV"/>
                                                 <constraint firstItem="gkR-SS-ivT" firstAttribute="leading" secondItem="zew-y0-WDV" secondAttribute="leading" constant="20" id="iEj-fD-duw"/>
                                                 <constraint firstItem="ECn-iR-0Zs" firstAttribute="leading" secondItem="zew-y0-WDV" secondAttribute="leading" constant="10" id="rfG-P4-0rD"/>
+                                                <constraint firstItem="dgT-8Z-Piy" firstAttribute="top" secondItem="gkR-SS-ivT" secondAttribute="bottom" constant="10" id="xPB-Zs-xjz"/>
+                                                <constraint firstAttribute="trailing" secondItem="dgT-8Z-Piy" secondAttribute="trailing" constant="20" id="y9d-Sf-UhH"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="zew-y0-WDV" firstAttribute="top" secondItem="n6m-br-4ut" secondAttribute="top" id="cyb-VC-QYr"/>
                                         <constraint firstItem="zew-y0-WDV" firstAttribute="leading" secondItem="n6m-br-4ut" secondAttribute="leading" id="ffI-0h-yQA"/>
+                                        <constraint firstAttribute="bottom" secondItem="zew-y0-WDV" secondAttribute="bottom" id="jnn-gc-CjU"/>
                                         <constraint firstAttribute="trailing" secondItem="zew-y0-WDV" secondAttribute="trailing" id="p8Y-Lw-GoV"/>
                                     </constraints>
                                     <connections>
+                                        <outlet property="noPlantsLabel" destination="dgT-8Z-Piy" id="1yB-vS-E8d"/>
+                                        <outlet property="noPlantsLabelHeightConstraint" destination="LL2-St-jIG" id="xbT-sV-CH3"/>
                                         <outlet property="waterTodayPlantsCollectionView" destination="p3k-tX-5DZ" id="w7r-Fw-2IB"/>
                                     </connections>
                                 </collectionReusableView>
@@ -310,7 +357,7 @@
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czb-g2-w4p">
                                                             <rect key="frame" x="334" y="220" width="60" height="60"/>
-                                                            <color key="backgroundColor" red="0.093844855889999995" green="0.81462921070000005" blue="0.6293616675" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.08154415072" green="0.70785176780000003" blue="0.54686814939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="60" id="uPA-Q2-uM1"/>
                                                                 <constraint firstAttribute="height" constant="60" id="v0u-jT-Q5L"/>
@@ -704,6 +751,7 @@
     </scenes>
     <resources>
         <image name="cameraIcon" width="25" height="25"/>
+        <image name="newPlantImage" width="500" height="500"/>
         <image name="plusIcon" width="24" height="24"/>
         <image name="trashIcon" width="25" height="25"/>
         <image name="waterIcon" width="100" height="100"/>
