@@ -21,7 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
         }
+        addDefaultNotificationsTimeToUserDefaults()
         return true
+    }
+    
+    func addDefaultNotificationsTimeToUserDefaults() {
+        if UserDefaults.standard.object(forKey: WateringTime.morning.rawValue) == nil {
+            var moringDateComponents = DateComponents()
+            moringDateComponents.hour = 8
+            moringDateComponents.minute = 0
+            moringDateComponents.second = 0
+            UserDefaults.standard.set(Calendar.current.date(from: moringDateComponents), forKey: WateringTime.morning.rawValue)
+        }
+        
+        if UserDefaults.standard.object(forKey: WateringTime.evening.rawValue) == nil {
+            var eveningDateComponents = DateComponents()
+            eveningDateComponents.hour = 20
+            eveningDateComponents.minute = 0
+            eveningDateComponents.second = 0
+            UserDefaults.standard.set(Calendar.current.date(from: eveningDateComponents), forKey: WateringTime.evening.rawValue)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

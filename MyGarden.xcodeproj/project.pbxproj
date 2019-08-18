@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		590828D42309560C00493F1F /* MainViewEmptyMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590828D32309560C00493F1F /* MainViewEmptyMessageCell.swift */; };
+		59089824230992E6005D56C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59089823230992E6005D56C0 /* SettingsViewController.swift */; };
 		590AE66E2303F1BC0089E7BE /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66D2303F1BC0089E7BE /* UIImage.swift */; };
 		590AE6702304687D0089E7BE /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE66F2304687D0089E7BE /* NetworkConstants.swift */; };
 		590AE673230482070089E7BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590AE672230482070089E7BE /* CoreDataStack.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		590828D32309560C00493F1F /* MainViewEmptyMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewEmptyMessageCell.swift; sourceTree = "<group>"; };
+		59089823230992E6005D56C0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		590AE66D2303F1BC0089E7BE /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		590AE66F2304687D0089E7BE /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		590AE672230482070089E7BE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		59089822230992A8005D56C0 /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59089823230992E6005D56C0 /* SettingsViewController.swift */,
+			);
+			path = SettingsViewController;
+			sourceTree = "<group>";
+		};
 		590AE671230481D10089E7BE /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 		5951C23022FAB56900F100F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				59089822230992A8005D56C0 /* SettingsViewController */,
 				59E66D0F2301DEDA00791DDD /* PlantDetailViewController */,
 				59E66D012301C3FF00791DDD /* EditPlantViewController */,
 				591E18F522FF59EF003BA271 /* MainViewController */,
@@ -345,6 +356,7 @@
 				59508850230337D1007658A9 /* ApiService.swift in Sources */,
 				599C447822FCC4F6005C30A7 /* PlantDetailViewController.swift in Sources */,
 				59D8DC3B230684A300361616 /* EditPlantDeleteCell.swift in Sources */,
+				59089824230992E6005D56C0 /* SettingsViewController.swift in Sources */,
 				5951C22F22FA033500F100F9 /* WateringTime.swift in Sources */,
 				5951C20222F9F02100F100F9 /* MyGarden.xcdatamodeld in Sources */,
 				590828D42309560C00493F1F /* MainViewEmptyMessageCell.swift in Sources */,

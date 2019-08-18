@@ -22,13 +22,13 @@ class EditPlantTextFieldsCell: UITableViewCell {
     
     @IBOutlet weak var dayPottedTextField: UITextField!
    
-    private var waterSchedulePicker: UIPickerView?
+    var waterSchedulePicker: UIPickerView?
     
-    private var datePicker: UIDatePicker?
+    var datePicker: UIDatePicker?
     
-    private var wateringTimePicker: UIPickerView?
+    var wateringTimePicker: UIPickerView?
     
-    private var plantKindPicker: UIPickerView?
+    var plantKindPicker: UIPickerView?
     
     static let wateringTimeValues: [String] = {
         var values = [String]()

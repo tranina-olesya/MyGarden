@@ -9,8 +9,6 @@
 import Foundation
 import UserNotifications
 
-let notificationsTime: [WateringTime: Int] = [.morning: 8, .evening: 20]
-
 class UserNotificationService {
     
     static func updateNotification(plant: Plant) {
@@ -53,11 +51,16 @@ class UserNotificationService {
     }
     
     
-    static func getNextWateringTime(plant: Plant) -> Date {
-        var lastWaterdDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: plant.lastWatered ?? Date())
+    static func getNextWateringTime(plant: Plant) -> Date? {
+        guard let plantLastWatered = plant.lastWatered,
+            let wateringTime = UserDefaults.standard.object(forKey: plant.wateringTime.rawValue) as? Date else {
+            return nil
+        }
+        var lastWaterdDateComponents = Calendar.current.dateComponents([.day, .month, .year], from: plantLastWatered)
+        let wateringTimeDateComponents = Calendar.current.dateComponents([.minute, .hour], from: wateringTime)
         lastWaterdDateComponents.second = 0
-        lastWaterdDateComponents.minute = 0
-        lastWaterdDateComponents.hour = notificationsTime[plant.wateringTime]
+        lastWaterdDateComponents.minute = wateringTimeDateComponents.minute
+        lastWaterdDateComponents.hour = wateringTimeDateComponents.hour
         let lastWatered = Calendar.current.date(from: lastWaterdDateComponents)!
         
         

@@ -31,6 +31,25 @@ class DataProvider {
         }
     }
     
+    func getAllPlants(
+        with wateringTime: WateringTime,
+        onComplete: @escaping ([Plant]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "wateringTimeRaw = %@", wateringTime.rawValue)
+                guard let result = try self.context.fetch(fetchRequest) as? [Plant] else {
+                    onComplete([])
+                    return
+                }
+                onComplete(result)
+            } catch {
+                print(error.localizedDescription)
+                onComplete([])
+            }
+        }
+    }
+    
     func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int, photoUrl: String, plantEntry: PlantEntry?) {
         DispatchQueue.global(qos: .background).async {
             do {

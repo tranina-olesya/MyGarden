@@ -151,7 +151,7 @@ class EditPlantViewController: UIViewController {
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        tableViewBottomConstraint.constant = keyboardRect.height
+        tableViewBottomConstraint.constant = keyboardRect.height - (tabBarController?.tabBar.frame.size.height ?? 0)
         navigationController?.navigationBar.isHidden = true
     }
 

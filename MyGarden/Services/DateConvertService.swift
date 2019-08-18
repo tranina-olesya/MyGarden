@@ -10,6 +10,7 @@ import Foundation
 
 class DateConvertService {
     static let dateFormat = "dd MMM, yyyy"
+    static let timeFormat = "HH:mm"
     
     static func convertToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -21,5 +22,11 @@ class DateConvertService {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.date(from: dateString)
+    }
+    
+    static func convertTimeToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = timeFormat
+        return dateFormatter.string(from: date)
     }
 }
