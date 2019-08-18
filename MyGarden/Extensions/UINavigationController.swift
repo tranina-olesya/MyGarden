@@ -16,4 +16,12 @@ extension UINavigationController {
         navigationBar.backgroundColor = .clear
         navigationBar.tintColor = .white
     }
+    
+    func designWhite() {
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = false
+        navigationBar.backgroundColor = .white
+        navigationBar.tintColor = .darkGray
+    }
 }

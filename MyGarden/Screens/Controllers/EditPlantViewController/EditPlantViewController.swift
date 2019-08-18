@@ -54,6 +54,12 @@ class EditPlantViewController: UIViewController {
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? EditPlantImageCell {
             cell.handleScroll(offset: offset)
         }
+        
+        if offset > SectionSize.image {
+            navigationController?.designWhite()
+        } else {
+            navigationController?.designTransparent()
+        }
     }
     
     func loadWikiInforamtion() {
