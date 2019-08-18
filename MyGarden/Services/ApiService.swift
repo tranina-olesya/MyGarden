@@ -9,6 +9,12 @@
 import Foundation
 
 class ApiService {
+    private struct PatternConstants {
+        static let firstListNameDescription = "\\|<center>\\s+\\{\\{bt-ruslat\\|(?<name>([\\w\\s])+)((.|\\n)+\\|){6}(?<description>.+)"
+        static let firstListName = "\\|<center>\\s+\\{\\{bt-ruslat\\|(?<name>([\\w\\s])+)"
+        static let secondList = "\\[\\[(?<name>.+?)(\\]\\]|\\|)"
+    }
+    
     static func getWikiInfo(
         onCompleted: @escaping ([PlantEntry]) -> Void,
         onError: @escaping (Error) -> Void
@@ -33,7 +39,7 @@ class ApiService {
         }
     }
     
-    static func loadFromApi(
+    private static func loadFromApi(
         url: URL,
         onCompleted: @escaping ([PlantEntry]) -> Void,
         onError: @escaping (Error) -> Void
@@ -67,34 +73,53 @@ class ApiService {
         
         var plants = [PlantEntry]()
         
-        for item in firstList {
-            let patternNameDescription = "\\|<center>\\s+\\{\\{bt-ruslat\\|(?<name>([\\w\\s])+)((.|\\n)+\\|){6}(?<description>.+)"
-            var regexp = try? NSRegularExpression(pattern: patternNameDescription, options: .caseInsensitive)
-            if let match = regexp?.firstMatch(in: item, options: [], range: NSRange(location: 0, length: item.utf16.count)),
+        plants.append(contentsOf: getPlantsFromFirstList(list: firstList))
+        plants.append(contentsOf: getPlantsFromSecondList(list: secondList))
+        
+        return plants
+    }
+    
+    private static func getPlantsFromFirstList(list: [String]) -> [PlantEntry] {
+        var plants = [PlantEntry]()
+
+        let regexpNameDescription = try? NSRegularExpression(pattern: PatternConstants.firstListNameDescription, options: .caseInsensitive)
+        let regexpName = try? NSRegularExpression(pattern: PatternConstants.firstListName, options: .caseInsensitive)
+        
+        for item in list {
+            if let match = regexpNameDescription?.firstMatch(in: item, options: [], range: NSRange(location: 0, length: item.utf16.count)),
                 let nameRange = Range(match.range(withName: "name"), in: item),
                 let descriptionRange = Range(match.range(withName: "description"), in: item) {
-                let plantName = item[nameRange]
-                let plantDescription = item[descriptionRange]
-                plants.append(PlantEntry(name: String(plantName.trimmingCharacters(in: .whitespacesAndNewlines)), description: String(plantDescription.trimmingCharacters(in: .whitespacesAndNewlines))))
+                
+                let plantName = String(item[nameRange].trimmingCharacters(in: .whitespacesAndNewlines))
+                let plantDescription = String(item[descriptionRange].trimmingCharacters(in: .whitespacesAndNewlines))
+                
+                plants.append(PlantEntry(name: plantName, description: plantDescription))
             } else {
-                let patternName = "\\|<center>\\s+\\{\\{bt-ruslat\\|(?<name>([\\w\\s])+)"
-                regexp = try? NSRegularExpression(pattern: patternName, options: .caseInsensitive)
-                if let match = regexp?.firstMatch(in: item, options: [], range: NSRange(location: 0, length: item.utf16.count)),
+                if let match = regexpName?.firstMatch(in: item, options: [], range: NSRange(location: 0, length: item.utf16.count)),
                     let nameRange = Range(match.range(withName: "name"), in: item) {
-                    let plantName = item[nameRange]
-                    plants.append(PlantEntry(name: String(plantName.trimmingCharacters(in: .whitespacesAndNewlines)), description: nil))
+                    
+                    let plantName = String(item[nameRange].trimmingCharacters(in: .whitespacesAndNewlines))
+                    
+                    plants.append(PlantEntry(name: plantName, description: nil))
                 }
             }
         }
         
-        for item in secondList {
-            let pattern = "\\[\\[(?<name>.+?)(\\]\\]|\\|)"
-            let regexp = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        return plants
+    }
+    
+    private static func getPlantsFromSecondList(list: [String]) -> [PlantEntry] {
+        var plants = [PlantEntry]()
+
+        let regexp = try? NSRegularExpression(pattern: PatternConstants.secondList, options: .caseInsensitive)
+        
+        for item in list {
             if let match = regexp?.firstMatch(in: item, options: [], range: NSRange(location: 0, length: item.utf16.count)),
                 let nameRange = Range(match.range(withName: "name"), in: item) {
-                let plantName = item[nameRange]
-                let plant = PlantEntry(name: String(plantName.trimmingCharacters(in: .whitespacesAndNewlines)), description: nil)
-                plants.append(plant)
+                
+                let plantName = String(item[nameRange].trimmingCharacters(in: .whitespacesAndNewlines))
+                
+                plants.append(PlantEntry(name: plantName, description: nil))
             }
         }
         

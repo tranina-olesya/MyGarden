@@ -51,7 +51,7 @@ class EditPlantImageCell: UITableViewCell {
     
     func handleScroll(offset: CGFloat) {
         clipsToBounds = offset >= 0
-        heightConstraint.constant = 300 - offset
+        heightConstraint.constant = EditPlantViewController.SectionSize.image - offset
     }
 
 }

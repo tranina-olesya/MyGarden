@@ -25,6 +25,12 @@ class PlantDetailViewController: UIViewController {
         case wikiDescription
     }
     
+    struct SectionSize {
+        static let image: CGFloat = 300.0
+        static let wikiDescription: CGFloat = 200.0
+        static let defaultField: CGFloat = 78.0
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     var plant: Plant?
@@ -66,7 +72,12 @@ class PlantDetailViewController: UIViewController {
 
 extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return plant?.plantKind != nil ? Sections.allCases.count : Sections.allCases.count - 2
+        if plant?.plantKind == nil {
+            return Sections.allCases.count - 2
+        } else if plant?.wikiDescription == nil {
+            return Sections.allCases.count - 1
+        }
+        return Sections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,7 +138,7 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 return UITableViewCell()
             }
             if let waterSchedule = plant?.waterSchedule {
-                cell.configureCell(fieldName: "Water Schedule", fieldValue: Plant.waterScheduleValues[Int(waterSchedule)])
+                cell.configureCell(fieldName: "Water Schedule", fieldValue: Plant.waterScheduleValues[Int(waterSchedule) - 1])
             }
             return cell
         case .plantKind:
@@ -156,11 +167,11 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
         
         switch sectionType {
         case .image:
-            return 300.0
+            return SectionSize.image
         case .wikiDescription:
-            return 200.0
+            return SectionSize.wikiDescription
         default:
-            return 78.0
+            return SectionSize.defaultField
         }
     }
 }

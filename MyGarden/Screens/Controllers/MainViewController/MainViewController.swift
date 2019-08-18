@@ -17,6 +17,9 @@ class MainViewController: UIViewController {
     private struct Constatnts {
         static let cellMarginSize: CGFloat = 10
         static let cellRatio: CGFloat = 1.4
+        static let noPlantsHeaderHeight: CGFloat = 178
+        static let waterTodayPlantsHeaderHeight: CGFloat = 326
+        static let noPlantsCellHeight: CGFloat = 300
     }
     
     private enum Sections: Int {
@@ -24,10 +27,10 @@ class MainViewController: UIViewController {
         case emptyMessage
     }
     
-    @IBOutlet weak var allPlantsCollectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var plants: [Plant] = []
-    var waterNotificationPlants: [Plant] = []
+    var waterTodayPlants: [Plant] = []
     
     let dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
     
@@ -39,8 +42,8 @@ class MainViewController: UIViewController {
     }
 
     func configureCollectionView() {
-        allPlantsCollectionView.delegate = self
-        allPlantsCollectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +60,7 @@ class MainViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateCellSize(screenWidth: size.width)
-        allPlantsCollectionView.reloadData()
+        collectionView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +70,7 @@ class MainViewController: UIViewController {
         switch mainViewSegue {
         case .plantDetail:
             guard let vc = segue.destination as? PlantDetailViewController,
-                let index = allPlantsCollectionView.indexPathsForSelectedItems?.first?.row else {
+                let index = collectionView.indexPathsForSelectedItems?.first?.row else {
                     return
             }
             vc.plant = plants[index]
@@ -85,8 +88,8 @@ class MainViewController: UIViewController {
         self.dataProvider.getAllPlants { (plants) in
             DispatchQueue.main.async {
                 self.plants = plants
-                self.waterNotificationPlants = self.formWaterNotificationPlatsArray(plants: plants)
-                self.allPlantsCollectionView.reloadData()
+                self.waterTodayPlants = self.formWaterNotificationPlatsArray(plants: plants)
+                self.collectionView.reloadData()
             }
         }
     }
@@ -129,7 +132,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard !plants.isEmpty else {
-            return CGSize(width: view.frame.width, height: 300)
+            return CGSize(width: view.frame.width, height: Constatnts.noPlantsCellHeight)
         }
         return allPlantsCellSize
     }
@@ -138,15 +141,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MainViewWaterTodayPlantsView", for: indexPath) as? MainViewWaterTodayPlantsView else {
             return UICollectionReusableView()
         }
-        view.configureView(plants: waterNotificationPlants)
+        view.configureView(plants: waterTodayPlants)
         return view
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if waterNotificationPlants.isEmpty {
-            return CGSize(width: view.frame.width, height: 178)
+        if waterTodayPlants.isEmpty {
+            return CGSize(width: view.frame.width, height: Constatnts.noPlantsHeaderHeight)
         } else {
-            return CGSize(width: view.frame.width, height: 326)
+            return CGSize(width: view.frame.width, height: Constatnts.waterTodayPlantsHeaderHeight)
         }
     }
 }

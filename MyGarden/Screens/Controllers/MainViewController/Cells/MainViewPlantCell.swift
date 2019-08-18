@@ -14,6 +14,10 @@ class MainViewPlantCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    private struct Constants {
+        static let imageWidth: CGFloat = 400.0
+    }
+    
     var plant: Plant? {
         didSet {
             nameLabel.text = plant?.name
@@ -26,7 +30,7 @@ class MainViewPlantCell: UICollectionViewCell {
             return
         }
         ImageStorageService.getSavedImage(name: name) { (image) in
-            let resizedImage = image?.resize(width: 400)
+            let resizedImage = image?.resize(width: Constants.imageWidth)
             
             DispatchQueue.main.async {
                 if resizedImage != nil {

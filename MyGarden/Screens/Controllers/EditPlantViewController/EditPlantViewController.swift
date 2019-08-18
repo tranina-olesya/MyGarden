@@ -15,6 +15,12 @@ class EditPlantViewController: UIViewController {
         case fields
         case delete
     }
+    
+    struct SectionSize {
+        static let image: CGFloat = 300.0
+        static let fields: CGFloat = 520.0
+        static let delete: CGFloat = 90.0
+    }
    
     @IBOutlet weak var tableView: UITableView!
     
@@ -117,14 +123,15 @@ class EditPlantViewController: UIViewController {
             let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
             let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
             let plantImage = plantImage,
+            let waterScheduleRaw = cell.waterScheduleTextField.text,
+            let plantKindName = cell.plantTextField.text,
             let pathUrl = ImageStorageService.saveImage(name: name, image: plantImage.resize(width: 1000.0) ?? plantImage) {
             
             let plant = self.plant ?? Plant(context: CoreDataStack.shared.persistentContainer.viewContext)
             
-            if let index = cell.plantKindPicker?.selectedRow(inComponent: 0),
-                index > 0 {
-                plant.plantKind = plantEntries[index - 1].name
-                plant.wikiDescription = plantEntries[index - 1].description
+            if let plantEntry = plantEntries.first(where: {$0.name == plantKindName}) {
+                plant.plantKind = plantEntry.name
+                plant.wikiDescription = plantEntry.description
             } else {
                 plant.plantKind = nil
                 plant.wikiDescription = nil
@@ -133,8 +140,8 @@ class EditPlantViewController: UIViewController {
             plant.descriptionText = description
             plant.dayPotted = dayPotted
             plant.wateringTime = wateringTime
-            plant.waterSchedule = Int16((cell.wateringTimePicker?.selectedRow(inComponent: 0) ?? 0) + 1)  // Int16(waterSchedule)
-            plant.lastWatered = Date()
+            plant.waterSchedule = (getWaterSchedule(rawString: waterScheduleRaw) ?? 0) + 1
+            plant.lastWatered = plant.lastWatered ?? Date()
             plant.photoUrl = pathUrl
             plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
             
@@ -165,12 +172,19 @@ class EditPlantViewController: UIViewController {
             return
         }
         tableViewBottomConstraint.constant = keyboardRect.height - (tabBarController?.tabBar.frame.size.height ?? 0)
-        navigationController?.navigationBar.isHidden = true
     }
 
     @objc func keyboardWillHide(notification: Notification) {
         tableViewBottomConstraint.constant = 0
-        navigationController?.navigationBar.isHidden = false
+    }
+    
+    private func getWaterSchedule(rawString: String)  -> Int16? {
+        for i in 1..<Plant.waterScheduleValues.count {
+            if rawString == Plant.waterScheduleValues[i] {
+                return Int16(i)
+            }
+        }
+        return nil
     }
 }
 
@@ -219,11 +233,11 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch sectionType {
         case .image:
-            return 300.0
+            return SectionSize.image
         case .fields:
-            return 520.0
+            return SectionSize.fields
         case .delete:
-            return 90.0
+            return SectionSize.delete
         }
     }
 }

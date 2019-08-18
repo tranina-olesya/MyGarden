@@ -43,10 +43,9 @@ class EditPlantTextFieldsCell: UITableViewCell {
             if let plant = plant {
                 nameTextField.text = plant.name
                 descriptionTextField.text = plant.descriptionText
-                print(plant.plantKind)
                 plantTextField.text = plant.plantKind ?? "Other"
                 wateringTimeTextField.text = plant.wateringTime.rawValue
-                waterScheduleTextField.text = Plant.waterScheduleValues[Int(plant.waterSchedule)]
+                waterScheduleTextField.text = Plant.waterScheduleValues[Int(plant.waterSchedule) - 1]
                 dayPottedTextField.text = DateConvertService.convertToString(date: plant.dayPotted ?? Date())
             }
         }

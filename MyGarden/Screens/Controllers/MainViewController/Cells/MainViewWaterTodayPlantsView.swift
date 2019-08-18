@@ -16,6 +16,11 @@ class MainViewWaterTodayPlantsView: UICollectionReusableView {
     
     @IBOutlet weak var noPlantsLabelHeightConstraint: NSLayoutConstraint!
     
+    private struct Constants {
+        static let cellSize = CGSize(width: 110, height: 150)
+        static let noPlantsLabelHeight: CGFloat = 22.0
+    }
+    
     var waterTodayPlants = [Plant]()
     
     lazy var dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
@@ -30,7 +35,7 @@ class MainViewWaterTodayPlantsView: UICollectionReusableView {
         if plants.isEmpty {
             waterTodayPlantsCollectionView.isHidden = true
             noPlantsLabel.isHidden = false
-            noPlantsLabelHeightConstraint.constant = 22
+            noPlantsLabelHeightConstraint.constant = Constants.noPlantsLabelHeight
         } else {
             waterTodayPlantsCollectionView.isHidden = false
             noPlantsLabel.isHidden = true
@@ -64,7 +69,7 @@ extension MainViewWaterTodayPlantsView: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 150)
+        return Constants.cellSize
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -73,12 +78,5 @@ extension MainViewWaterTodayPlantsView: UICollectionViewDelegate, UICollectionVi
         }
         
         cell.cellSelected()
-        
-        let plant = waterTodayPlants[indexPath.row]
-        plant.lastWatered = Date()
-        plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
-        dataProvider.savePlant(plant: plant)
-        UserNotificationService.updateNotification(plant: plant)
-
     }
 }

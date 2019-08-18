@@ -9,6 +9,9 @@
 import UIKit
 
 class MainViewWaterTodayPlantCell: UICollectionViewCell {
+    private struct Constants {
+        static let imageWidth: CGFloat = 200.0
+    }
     
     @IBOutlet weak var plantImageView: UIImageView!
     
@@ -17,6 +20,8 @@ class MainViewWaterTodayPlantCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var wateredView: UIView!
+    
+    lazy var dataProvider = DataProvider(context: CoreDataStack.shared.persistentContainer.viewContext)
     
     var plant: Plant? {
         didSet {
@@ -30,24 +35,21 @@ class MainViewWaterTodayPlantCell: UICollectionViewCell {
         }
     }
     
-//    var isWatered = false {
-//        didSet {
-//            wateredView.isHidden = !isWatered
-//        }
-//    }
-//
+    var wasSelected = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         wateredView.isHidden = true
     }
     
     private func getDaysFromLastWatered() -> Int? {
-        guard let lastWatered = plant?.lastWatered else {
+        guard let shouldWatered = plant?.nextWateringTime else {
             return nil
         }
-        let calendar = Calendar(identifier: .gregorian)
-        let date1 = calendar.startOfDay(for: lastWatered)
-        let date2 = calendar.startOfDay(for: Date())
+        let calendar = Calendar.current
+        let date1 = calendar.startOfDay(for: shouldWatered)
+        let date2 = calendar.startOfDay(for: Date(timeIntervalSinceNow: 60 * 60 * 24))
+    
         let components = calendar.dateComponents([.day], from: date1, to: date2)
         return components.day
     }
@@ -57,7 +59,7 @@ class MainViewWaterTodayPlantCell: UICollectionViewCell {
             return
         }
         ImageStorageService.getSavedImage(name: name) { (image) in
-            let resizedImage = image?.resize(width: 200)
+            let resizedImage = image?.resize(width: Constants.imageWidth)
             
             DispatchQueue.main.async {
                 if resizedImage != nil {
@@ -70,7 +72,18 @@ class MainViewWaterTodayPlantCell: UICollectionViewCell {
     }
     
     func cellSelected() {
+        guard let plant = plant,
+            !wasSelected else {
+            return
+        }
+        
         wateredView.isHidden = false
         daysLabel.isHidden = true
+        wasSelected = true
+        
+        plant.lastWatered = Date()
+        plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
+        dataProvider.savePlant(plant: plant)
+        UserNotificationService.updateNotification(plant: plant)
     }
 }
