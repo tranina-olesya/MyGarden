@@ -21,4 +21,12 @@ extension Plant {
             wateringTimeRaw = newValue.rawValue
         }
     }
+    
+    static let waterScheduleValues: [String] = {
+        var values = ["Every day"]
+        for day in 2...14 {
+            values.append("Every \(day) days")
+        }
+        return values
+    }()
 }

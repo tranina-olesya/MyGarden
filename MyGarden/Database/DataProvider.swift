@@ -38,36 +38,11 @@ class DataProvider {
             do {
                 let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
                 fetchRequest.predicate = NSPredicate(format: "wateringTimeRaw = %@", wateringTime.rawValue)
-                guard let result = try self.context.fetch(fetchRequest) as? [Plant] else {
-                    onComplete([])
-                    return
-                }
+                let result = try self.context.fetch(fetchRequest)
                 onComplete(result)
             } catch {
                 print(error.localizedDescription)
                 onComplete([])
-            }
-        }
-    }
-    
-    func savePlant(name: String, description: String?, wateringTime: WateringTime, dayPotted: Date, waterSchedule: Int, photoUrl: String, plantEntry: PlantEntry?) {
-        DispatchQueue.global(qos: .background).async {
-            do {
-                let plant = Plant(context: self.context)
-                plant.name = name
-                plant.descriptionText = description
-                plant.dayPotted = dayPotted
-                plant.wateringTime = wateringTime
-                plant.waterSchedule = Int16(waterSchedule)
-                plant.lastWatered = Date()
-                plant.photoUrl = photoUrl
-                plant.plantKind = plantEntry?.name
-                plant.wikiDescription = plantEntry?.description
-                plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
-                try self.context.save()
-                UserNotificationService.updateNotification(plant: plant)
-            } catch {
-                print(error.localizedDescription)
             }
         }
     }

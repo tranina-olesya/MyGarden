@@ -127,7 +127,7 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
                 return UITableViewCell()
             }
             if let waterSchedule = plant?.waterSchedule {
-                cell.configureCell(fieldName: "Water Schedule", fieldValue: String(waterSchedule))
+                cell.configureCell(fieldName: "Water Schedule", fieldValue: Plant.waterScheduleValues[Int(waterSchedule)])
             }
             return cell
         case .plantKind:

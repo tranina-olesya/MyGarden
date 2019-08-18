@@ -40,6 +40,7 @@ class EditPlantImageCell: UITableViewCell {
         
         actionSheet.addAction(UIAlertAction(title: "Remove image", style: .destructive, handler: { (action) in
             self.plantImageView?.image = UIImage()
+            self.delegate?.imageAdded(image: nil)
         }))
         delegate?.presentView(actionSheet, animated: true)
     }
@@ -71,5 +72,5 @@ protocol EditPlantImageCellDelegate: class {
     
     func dismiss(animated: Bool)
     
-    func imageAdded(image: UIImage)
+    func imageAdded(image: UIImage?)
 }

@@ -56,8 +56,6 @@ class EditPlantViewController: UIViewController {
             DispatchQueue.main.async {
                 if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell {
                     cell.plantEntries = plantEntries
-                    cell.plantTextField.isEnabled = true
-                    cell.plantTextField.text = plantEntries[0].name
                 }
             }
         }) { (error) in
@@ -76,12 +74,11 @@ class EditPlantViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        guard let imageCell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.image.rawValue)) as? EditPlantImageCell,
-            let image = imageCell.plantImageView.image?.fixOrientation() else {
+        guard plantImage != nil else {
             showAlert(title: "No image", message: "Please add an image of your plant")
             return
         }
-        
+
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell,
             let name = cell.nameTextField.text,
             !name.isEmpty else {
@@ -89,46 +86,62 @@ class EditPlantViewController: UIViewController {
             return
         }
         
-        dataProvider.checkIfUniqueName(name: name, onComplete: {
-            (isUnique) in
-            
-            if !isUnique {
-                DispatchQueue.main.async {
-                    self.showAlert(title: "Not a unique name", message: "Plant with name \"\(name)\" alresy exists")
-                }
-                return
-            }
-            
-            if let description = cell.descriptionTextField.text,
-                let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
-                let waterSchedule = Int(cell.waterScheduleTextField.text ?? ""),
-                let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
-                let plantEntry = self.plantEntries.first(where: { $0.name == cell.plantTextField.text }){
-                if let pathUrl = ImageStorageService.saveImage(name: name, image: image.resize(width: 1000.0) ?? image) {
-                    if let plant = self.plant {
-                        plant.name = name
-                        plant.descriptionText = description
-                        plant.dayPotted = dayPotted
-                        plant.wateringTime = wateringTime
-                        plant.waterSchedule = Int16(waterSchedule)
-                        plant.lastWatered = Date()
-                        plant.photoUrl = pathUrl
-                        plant.plantKind = plantEntry.name
-                        plant.wikiDescription = plantEntry.description
-                        self.dataProvider.savePlant(plant: plant)
-                    } else {
-                        self.dataProvider.savePlant(name: name, description: description, wateringTime: wateringTime, dayPotted: dayPotted, waterSchedule: waterSchedule, photoUrl: pathUrl, plantEntry: plantEntry)
+        if let plant = plant,
+            name == plant.name {
+            savePlant()
+        } else {
+            dataProvider.checkIfUniqueName(name: name, onComplete: {
+                (isUnique) in
+                guard isUnique else {
+                    DispatchQueue.main.async {
+                        self.showAlert(title: "Not a unique name", message: "Plant with name \"\(name)\" alresy exists")
                     }
-                    self.navigationController?.popToRootViewController(animated: true)
+                    return
                 }
-            }
-            // error
-        }, onError: {
-            (error) in
-            // error
-        })
-        
+                self.savePlant()
+            }, onError: {
+                (error) in
+                print(error.localizedDescription)
+            })
+        }
        
+    }
+    
+    func savePlant() {
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.fields.rawValue)) as? EditPlantTextFieldsCell else {
+                return
+        }
+        
+        if let name = cell.nameTextField.text,
+            let description = cell.descriptionTextField.text,
+            let wateringTime = WateringTime(rawValue: cell.wateringTimeTextField.text ?? ""),
+            let dayPotted = DateConvertService.convertToDate(dateString: cell.dayPottedTextField.text ?? ""),
+            let plantImage = plantImage,
+            let pathUrl = ImageStorageService.saveImage(name: name, image: plantImage.resize(width: 1000.0) ?? plantImage) {
+            
+            let plant = self.plant ?? Plant(context: CoreDataStack.shared.persistentContainer.viewContext)
+            
+            if let index = cell.plantKindPicker?.selectedRow(inComponent: 0),
+                index > 0 {
+                plant.plantKind = plantEntries[index - 1].name
+                plant.wikiDescription = plantEntries[index - 1].description
+            } else {
+                plant.plantKind = nil
+                plant.wikiDescription = nil
+            }
+            plant.name = name
+            plant.descriptionText = description
+            plant.dayPotted = dayPotted
+            plant.wateringTime = wateringTime
+            plant.waterSchedule = Int16((cell.wateringTimePicker?.selectedRow(inComponent: 0) ?? 0) + 1)  // Int16(waterSchedule)
+            plant.lastWatered = Date()
+            plant.photoUrl = pathUrl
+            plant.nextWateringTime = UserNotificationService.getNextWateringTime(plant: plant)
+            
+            self.dataProvider.savePlant(plant: plant)
+       
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     func showAlert(title: String, message: String) {
@@ -189,7 +202,6 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configureCell(plantEntries: plantEntries, plant: plant)
-//            cell.plantTextField.isEnabled = plantEntries.count > 0
             return cell
         case .delete:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EditPlantDeleteCell", for: indexPath) as? EditPlantDeleteCell else {
@@ -217,7 +229,7 @@ extension EditPlantViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension EditPlantViewController: EditPlantImageCellDelegate {
-    func imageAdded(image: UIImage) {
+    func imageAdded(image: UIImage?) {
         plantImage = image
     }
     

@@ -38,22 +38,15 @@ class EditPlantTextFieldsCell: UITableViewCell {
         return values
     }()
     
-    static let waterScheduleValues: [String] = {
-        var values = ["Every day"]
-        for day in 2...14 {
-            values.append("Every \(day) days")
-        }
-        return values
-    }()
-    
     var plant: Plant? {
         didSet {
             if let plant = plant {
                 nameTextField.text = plant.name
                 descriptionTextField.text = plant.descriptionText
-                plantTextField.text = plant.plantKind
+                print(plant.plantKind)
+                plantTextField.text = plant.plantKind ?? "Other"
                 wateringTimeTextField.text = plant.wateringTime.rawValue
-                waterScheduleTextField.text = String(plant.waterSchedule)
+                waterScheduleTextField.text = Plant.waterScheduleValues[Int(plant.waterSchedule)]
                 dayPottedTextField.text = DateConvertService.convertToString(date: plant.dayPotted ?? Date())
             }
         }
@@ -78,9 +71,6 @@ class EditPlantTextFieldsCell: UITableViewCell {
         self.plantEntries = plantEntries
         self.plant = plant
         configurePlantKindPicker()
-        if plantEntries.count > 0 {
-            plantTextField.text = plantEntries[0].name
-        }
     }
     
     func initUI() {
@@ -134,7 +124,7 @@ extension EditPlantTextFieldsCell: WaterSchedulePickerDelegate, WateringTimePick
     }
     
     func didSelectedWaterSchedule(row: Int) {
-        waterScheduleTextField.text = String(row + 1)
+        waterScheduleTextField.text = Plant.waterScheduleValues[row]
     }
 }
 
@@ -155,16 +145,15 @@ class WaterSchedulePickerDelegateDataSourse: NSObject,  UIPickerViewDelegate, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return EditPlantTextFieldsCell.waterScheduleValues[row]
+        return Plant.waterScheduleValues[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return EditPlantTextFieldsCell.waterScheduleValues.count
+        return Plant.waterScheduleValues.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         delegate?.didSelectedWaterSchedule(row: row)
-        
     }
 }
 
@@ -197,14 +186,14 @@ extension EditPlantTextFieldsCell: UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return plantEntries.count
+        return plantEntries.count + 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return plantEntries[row].name
+        return row == 0 ? "Other" : plantEntries[row - 1].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        plantTextField.text = plantEntries[row].name
+        plantTextField.text = row == 0 ? "Other" : plantEntries[row - 1].name
     }
 }
